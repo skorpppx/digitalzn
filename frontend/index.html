@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; media-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+  <title>Digital ZN</title>
+  <meta name="description" content="Digital ZN is a full-service digital marketing agency. We craft bold digital experiences that dominate markets and build legacies." />
+  <meta property="og:title" content="Digital ZN" />
+  <meta property="og:description" content="Digital excellence meets creative power." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <meta property="og:image" content="logo.png" />
+</head>
+<body>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo" onclick="scrollTo('hero')">
+    <img src="assets/logo.png" alt="Digital ZN">
+    <div class="nav-logo-text">Digital<span>ZN</span></div>
+  </a>
+  <div class="nav-links" id="nav-links">
+    <a href="#hero"      data-i18n="nav.home">Home</a>
+    <a href="#services"  data-i18n="nav.services">Services</a>
+    <a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a>
+    <a href="#about"     data-i18n="nav.about">About</a>
+    <a href="#contact"   data-i18n="nav.contact" class="nav-cta">Contact</a>
+  </div>
+  <div class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#hero"      onclick="closeMobileMenu()" data-i18n="nav.home">Home</a>
+  <a href="#services"  onclick="closeMobileMenu()" data-i18n="nav.services">Services</a>
+  <a href="#portfolio" onclick="closeMobileMenu()" data-i18n="nav.portfolio">Portfolio</a>
+  <a href="#about"     onclick="closeMobileMenu()" data-i18n="nav.about">About</a>
+  <a href="#contact"   onclick="closeMobileMenu()" data-i18n="nav.contact">Contact</a>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section id="hero">
+  <video
+    id="hero-video"
+    class="hero-video"
+    src="assets/Sequence-01.mp4"
+    autoplay muted loop playsinline
+    type="video/mp4"
+    oncanplay="this.classList.add('loaded')"
+  ></video>
+  <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span data-i18n="hero.badge">Digital Marketing Agency</span>
+    </div>
+    <h1 class="hero-title" id="hero-title">
+      <span class="word"><span data-i18n="hero.we">We</span></span>
+      <span class="word"><span data-i18n="hero.lead">Lead</span></span>
+      <span class="word"><span data-i18n="hero.the">The</span></span>
+      <span class="word"><span data-i18n="hero.feed">Feed</span></span>
+    </h1>
+    <p class="hero-tagline" data-i18n="hero.tagline">Digital excellence meets creative power.</p>
+    <p class="hero-sub" data-i18n="hero.sub">Creative digital agency based in Morocco. We design, build, and film for brands that want to stand out.</p>
+    <div class="hero-buttons">
+      <a href="#contact"   class="btn-primary"><span data-i18n="hero.cta">Start Your Journey</span></a>
+      <a href="#portfolio" class="btn-secondary" data-i18n="hero.see">See Our Portfolio</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint" onclick="smoothScroll('services')">
+    <span data-i18n="hero.scroll">Scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ MARQUEE ═══════════════════ -->
+<div class="marquee-section" aria-hidden="true">
+  <div class="marquee-track" id="marquee-track"></div>
+</div>
+
+<!-- ═══════════════════ SERVICES ═══════════════════ -->
+<section id="services">
+  <div class="section-inner">
+    <div class="services-header reveal">
+      <div class="section-eyebrow">
+        <span class="eyebrow-num">02 / Services</span>
+        <div class="eyebrow-line"></div>
+      </div>
+      <h2 class="section-title" data-i18n="services.title">What We Do</h2>
+      <p class="section-sub" data-i18n="services.subtitle">End-to-end digital solutions for brands that dare to lead.</p>
+    </div>
+    <div class="services-grid" id="services-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ STATS ═══════════════════ -->
+<section id="stats">
+  <div class="section-inner">
+    <div class="stats-header reveal">
+      <div class="stats-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-num" data-i18n="stats.label">By The Numbers</span>
+        <div class="eyebrow-line"></div>
+      </div>
+      <h2 class="section-title" data-i18n="stats.title">The Numbers Speak</h2>
+    </div>
+    <div class="stats-grid" id="stats-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ PORTFOLIO ═══════════════════ -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="work-header reveal">
+      <div>
+        <div class="section-eyebrow">
+          <span class="eyebrow-num">03 / Portfolio</span>
+          <div class="eyebrow-line"></div>
+        </div>
+        <h2 class="section-title" data-i18n="portfolio.title">Selected Portfolio</h2>
+        <p class="section-sub" data-i18n="portfolio.subtitle">A glimpse of campaigns that made markets move.</p>
+      </div>
+      <a href="#contact" class="btn-outline" data-i18n="portfolio.viewAll">View All Portfolio →</a>
+    </div>
+    <div class="work-grid" id="work-grid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-eyebrow">
+          <span class="eyebrow-num">04 / About</span>
+          <div class="eyebrow-line"></div>
+        </div>
+        <h2 class="section-title" data-i18n="about.title">We Are Digital ZN</h2>
+        <p data-i18n="about.body">Born in the digital age, Digital ZN is a full-service creative and digital marketing agency. We partner with ambitious brands to craft strategies that cut through the noise and lead the conversation.</p>
+        <p class="about-vision" data-i18n="about.vision">"Our vision is simple: to lead the feed wherever our clients are present."</p>
+        <div class="pillars" id="pillars-list"></div>
+      </div>
+      <div class="about-visual reveal reveal-delay-2">
+        <img src="assets/4K GIF by Sehsucht Berlin.gif" alt="Digital ZN motion">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ CONTACT ═══════════════════ -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="section-eyebrow">
+          <span class="eyebrow-num">05 / Contact</span>
+          <div class="eyebrow-line"></div>
+        </div>
+        <h2 class="section-title" data-i18n="contact.title">Let's Build Something Great</h2>
+        <p data-i18n="contact.subtitle">Ready to lead the feed? Tell us about your project.</p>
+        <div class="contact-details">
+          <div class="contact-row">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-row-label">Email</div>
+              <div class="contact-row-val">contact@digital-zn.com</div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-row-label">Phone</div>
+              <div class="contact-row-val">+212 786 112 133</div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-row-label">Location</div>
+              <div class="contact-row-val">Morocco · Casablanca</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <form class="contact-form" id="contact-form" onsubmit="handleFormSubmit(event)" novalidate autocomplete="on">
+          <div class="form-row">
+            <input class="form-field" type="text" name="name" data-i18n-placeholder="contact.name" placeholder="Your Name" required maxlength="80" autocomplete="name" />
+            <input class="form-field" type="email" name="email" data-i18n-placeholder="contact.email" placeholder="Your Email" required maxlength="120" autocomplete="email" />
+            <input class="form-field" type="tel" name="phone" data-i18n-placeholder="contact.phone" placeholder="+123-456-789" required maxlength="80" autocomplete="tel" />
+          </div>
+
+          <div class="services-select">
+            <div class="services-select-label" data-i18n="contact.servicesLabel">Services you're interested in</div>
+            <div class="services-chips" id="services-chips" role="group" aria-label="Services"></div>
+            <div class="services-error" id="services-error" data-i18n="contact.servicesError" hidden>Please select at least one service.</div>
+          </div>
+
+          <textarea class="form-field" name="message" data-i18n-placeholder="contact.msg" placeholder="Tell us about your project..." required maxlength="2000"></textarea>
+
+          <div class="form-error" id="form-error" hidden></div>
+
+          <button type="submit" class="btn-submit" id="form-submit">
+            <span data-i18n="contact.send">Send Message</span>
+            <span aria-hidden="true">✈</span>
+          </button>
+        </form>
+        <div class="form-success" id="form-success">
+          <div class="success-icon">✓</div>
+          <h3 data-i18n="contact.successTitle">Message Sent!</h3>
+          <p data-i18n="contact.successMsg">We'll get back to you within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="nav-logo-box"><img src="assets/logo.png" alt="Digital ZN"></div>
+        <div class="nav-logo-text">Digital<span>ZN</span></div>
+      </div>
+      <div class="footer-tagline" data-i18n="footer.tagline">"We Lead The Feed"</div>
+    </div>
+    <div class="footer-socials">
+      <a class="social-btn" href="https://www.instagram.com/digital_ma_zn/" target="_blank" rel="noopener noreferrer" title="Instagram">
+        <img src="https://img.icons8.com/?size=30&id=32323&format=png&color=000000" alt="Instagram">
+      </a>
+      <a class="social-btn" href="#" rel="noopener noreferrer" title="TIKTOK">
+        <img src="https://img.icons8.com/?size=30&id=118640&format=png&color=000000" alt="TIKTOK">
+      </a>
+      <a class="social-btn" href="#" rel="noopener noreferrer" title="Behance">
+        <img src="https://img.icons8.com/?size=30&id=13655&format=png&color=000000" alt="Behance">
+      </a>
+      <a class="social-btn" href="https://wa.me/212786112133" target="_blank" rel="noopener noreferrer" title="WhatsApp">
+        <img src="https://img.icons8.com/?size=30&id=16713&format=png&color=000000" alt="WhatsApp">
+      </a>
+    </div>
+    <div class="footer-copy">© <span id="year"></span> Digital ZN. <span data-i18n="footer.rights">All rights reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ═══════════════════ LANG SWITCHER ═══════════════════ -->
+<div id="lang-switcher" aria-label="Language switcher">
+  <button class="lang-btn active" onclick="setLang('en')" data-lang="en">EN</button>
+  <button class="lang-btn"        onclick="setLang('fr')" data-lang="fr">FR</button>
+  <button class="lang-btn"        onclick="setLang('ar')" data-lang="ar">AR</button>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
