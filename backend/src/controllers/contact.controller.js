@@ -1,3 +1,4 @@
+const contactService = require("../services/contact.service");
 exports.getContact = (req, res) => {
 
     res.json({
@@ -7,20 +8,35 @@ exports.getContact = (req, res) => {
 
 };
 
-exports.createContact = (req, res) => {
+exports.createContact = async (req, res) => {
 
-    console.log(req.body);
+    try {
 
-    res.status(201).json({
+        const contact =
+            await contactService.createContact(req.body);
 
-        success: true,
+        res.status(201).json({
 
-        message: "Welcome to Digital ZN Backend",
-        
-        timestamp: new Date(),
+            success: true,
 
-        data: req.body
+            message: "Contact saved successfully.",
 
-    });
+            data: contact
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            success: false,
+
+            message: "Internal Server Error"
+
+        });
+
+    }
 
 };
