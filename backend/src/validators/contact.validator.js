@@ -15,6 +15,14 @@ exports.contactValidation = [
     body("message")
         .trim()
         .isLength({ min: 10 })
-        .withMessage("Message must be at least 10 characters")
+        .withMessage("Message must be at least 10 characters"),
 
-];
+    body("phone")
+        .trim()
+        .notEmpty({require})
+        .withMessage("Phone is required"),
+
+    body("services")
+        .isArray({ min: 1 })
+        .withMessage("Select at least one service")
+]; 

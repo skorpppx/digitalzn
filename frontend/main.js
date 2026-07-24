@@ -1,7 +1,17 @@
 /* =========================================
    Digital ZN — Main JavaScript
    ========================================= */
+// ==========================================
+// API Configuration
+// ==========================================
 
+const API = {
+
+    BASE_URL: "http://localhost:3000",
+
+    CONTACT: "/api/contact"
+
+};
 /* ── Translations ── */
 const i18n = {
   en: {
@@ -580,7 +590,7 @@ function clearFormError() {
   if (el) { el.hidden = true; el.textContent = ''; }
 }
 
-function handleFormSubmit(e) {
+async function handleFormSubmit(e) {
   e.preventDefault();
   clearFormError();
 
@@ -598,7 +608,7 @@ function handleFormSubmit(e) {
 
   const rawName    = form.elements.name.value;
   const rawEmail   = form.elements.email.value;
-  const rawPhone   = form.elements.Phone.value;
+  const rawPhone = form.elements.phone.value;
   const rawMessage = form.elements.message.value;
 
   const name    = sanitizeText(rawName, 80);
@@ -632,20 +642,65 @@ function handleFormSubmit(e) {
     if (label) label.textContent = t.contact.sending || 'Sending...';
   }
 
-  // Persist submission in console + localStorage for the static build.
-  // Wire this to your backend / mail provider when you have one.
-  const payload = { name, email,phone, services, message, submittedAt: new Date().toISOString() };
-  try {
-    console.info('Digital ZN contact submission:', payload);
-    const log = JSON.parse(localStorage.getItem('dz_submissions') || '[]');
-    log.push(payload);
-    localStorage.setItem('dz_submissions', JSON.stringify(log.slice(-20)));
-    localStorage.setItem('dz_last_submit', String(Date.now()));
-  } catch (_) { /* ignore */ }
+const payload = {
+    name,
+    email,
+    phone,
+    services,
+    message
+};
 
-  setTimeout(() => {
-    form.style.display = 'none';
-    const success = document.getElementById('form-success');
-    if (success) success.classList.add('show');
-  }, 400);
-}
+fetch(`${API.BASE_URL}${API.CONTACT}`, {
+
+    method: "POST",
+
+    headers: {
+        "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify(payload)
+
+})
+.then(async response => {
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Failed to send message.");
+    }
+
+    localStorage.setItem("dz_last_submit", String(Date.now()));
+
+    form.style.display = "none";
+
+    const success = document.getElementById("form-success");
+
+    if (success) {
+        success.classList.add("show");
+    }
+
+})
+.catch(error => {
+
+    console.error(error);
+
+    showFormError(null, error.message);
+
+})
+.finally(() => {
+
+    if (submitBtn) {
+
+        submitBtn.disabled = false;
+
+        const label = submitBtn.querySelector(
+            'span[data-i18n="contact.send"]'
+        );
+
+        if (label) {
+            label.textContent = t.contact.send;
+        }
+
+    }
+
+});}
