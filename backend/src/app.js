@@ -1,8 +1,14 @@
 const express = require("express");
+
 const cors = require("cors");
+
+const authRoutes = require("./routes/auth.routes");
+
 const contactRoutes = require("./routes/contact.routes");
 
 const app = express();
+
+const adminRoutes = require("./routes/admin.routes");
 
 // Middleware
 app.use(cors({
@@ -24,6 +30,8 @@ app.get("/", (req, res) => {
     });
 });
 
+app.use("/api/admin",adminRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
 
 module.exports = app;

@@ -2,12 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <span id="admin-email"></span>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital ZN — Checklist + Profit Calculator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
+<body>
+<header class="suite-header">
+
+    <div class="brand">
+
+        <h1>Digital ZN</h1>
+
+        <span>Business Suite</span>
+
+    </div>
+
+    <div class="admin-info">
+
+        <span id="admin-email">
+
+            Loading...
+
+        </span>
+
+        <button id="logout">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
   <div class="wrap">
 
     <!-- Header -->
@@ -21,6 +49,7 @@
         <button class="mode-btn" onclick="setMode('package')" id="btn-package">Packages</button>
       </div>
     </div>
+
 
     <!-- Services List -->
     <div id="services-wrap"></div>
@@ -81,7 +110,15 @@
       </div>
 
       <div class="divider"></div>
+<div class="export-section">
 
+    <button id="exportPdf">
+
+        📄 Export PDF
+
+    </button>
+
+</div>
       <!-- Profit Split -->
       <div class="section-label">Profit split</div>
       <div class="toggle-row">
@@ -97,5 +134,7 @@
   </div>
 
   <script src="main.js"></script>
+  <script src="suite.js"></script>
 </body>
+
 </html>
