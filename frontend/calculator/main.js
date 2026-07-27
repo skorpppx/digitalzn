@@ -6,6 +6,7 @@
 /* ══════════════════
    DATA
 ══════════════════ */
+
 const ALACARTE = [
   { name: 'Logo only',                    cat: 'Graphic Design',       price: 300 },
   { name: 'Website Landing Page',         cat: 'Developement',         price: 900 },
@@ -28,6 +29,7 @@ const PACKAGES = [
 /* ══════════════════
    STATE
 ══════════════════ */
+
 let mode      = 'alacarte';
 let splitMode = 'contribution';
 let checked   = {};
@@ -37,6 +39,7 @@ let customs   = [];
 /* ══════════════════
    MODE SWITCH
 ══════════════════ */
+
 function setMode(m) {
   mode    = m;
   checked = {};
@@ -52,6 +55,7 @@ function setMode(m) {
 /* ══════════════════
    SPLIT SWITCH
 ══════════════════ */
+
 function setSplit(s) {
   splitMode = s;
   document.getElementById('sb-contribution').classList.toggle('active', s === 'contribution');
@@ -62,6 +66,7 @@ function setSplit(s) {
 /* ══════════════════
    HELPERS
 ══════════════════ */
+
 function getItems() {
   const base = mode === 'alacarte' ? ALACARTE : PACKAGES;
   return [...base, ...customs];
@@ -272,3 +277,16 @@ document.addEventListener('DOMContentLoaded', () => {
   renderServices();
   recalc();
 });
+/* ══════════════════
+   date format
+══════════════════ */
+
+document.getElementById("project-date").value =
+new Date().toISOString().split("T")[0];
+
+/* ══════════════════
+   read data from forme
+══════════════════ */
+document
+    .getElementById("exportPdf")
+    .addEventListener("click", exportPDF);

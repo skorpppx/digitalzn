@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <span id="admin-email"></span>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital ZN — Checklist + Profit Calculator</title>
   <link rel="stylesheet" href="style.css" />
@@ -13,43 +12,98 @@
 
     <div class="brand">
 
-        <h1>Digital ZN</h1>
+        <h1>Digital <span>ZN</span></h1>
 
-        <span>Business Suite</span>
+        <p>Project Profit Calculator</p>
 
     </div>
 
-    <div class="admin-info">
+    <div class="header-right">
 
-        <span id="admin-email">
+        <div class="admin-card">
 
-            Loading...
+            <div class="admin-title">
+                Logged in as
+            </div>
 
-        </span>
+            <div id="admin-email">
+                Loading...
+            </div>
+
+        </div>
 
         <button id="logout">
-
             Logout
-
         </button>
 
     </div>
 
 </header>
+</header>
   <div class="wrap">
 
     <!-- Header -->
     <div class="top-bar">
-      <div class="brand">
-        <div class="brand-dot"></div>
-        <div class="brand-name">Digital<span>ZN</span> — Checklist + Profit Calculator</div>
-      </div>
       <div class="mode-toggle">
         <button class="mode-btn active" onclick="setMode('alacarte')" id="btn-alacarte">À la carte</button>
         <button class="mode-btn" onclick="setMode('package')" id="btn-package">Packages</button>
       </div>
     </div>
+<section class="project-card">
 
+<h2>Project Information</h2>
+
+<div class="project-grid">
+
+<div>
+
+<label>Client Name</label>
+
+<input
+id="client-name"
+placeholder="Atlas Company">
+
+</div>
+
+<div>
+
+<label>Project Name</label>
+
+<input
+id="project-name"
+placeholder="Website Redesign">
+
+</div>
+
+<div>
+
+<label>Date</label>
+
+<input
+id="project-date"
+type="date">
+
+</div>
+
+<div>
+
+<label>Currency</label>
+
+<select id="currency">
+
+<option>MAD</option>
+
+<option>EUR</option>
+
+<option>USD</option>
+
+</select>
+
+</div>
+
+</div>
+
+</section>
 
     <!-- Services List -->
     <div id="services-wrap"></div>
@@ -110,15 +164,16 @@
       </div>
 
       <div class="divider"></div>
-<div class="export-section">
+      <!-- pdf section -->
+<button id="exportPdf">
 
-    <button id="exportPdf">
+<svg width="18" height="18" fill="none">
 
-        📄 Export PDF
+</svg>
 
-    </button>
+Export Professional PDF
 
-</div>
+</button>
       <!-- Profit Split -->
       <div class="section-label">Profit split</div>
       <div class="toggle-row">
@@ -132,7 +187,9 @@
     </div>
 
   </div>
-
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="pdf.js"></script>
   <script src="main.js"></script>
   <script src="suite.js"></script>
 </body>

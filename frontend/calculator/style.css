@@ -60,29 +60,7 @@
 
 }
 
-.export-section{
 
-    margin-top:60px;
-
-    display:flex;
-
-    justify-content:center;
-
-}
-
-#exportPdf{
-
-    padding:18px 40px;
-
-    font-size:18px;
-
-    border:none;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-}
 .suite-header{
 
     width:100%;
@@ -710,4 +688,189 @@ body {
   .summary-grid { grid-template-columns: 1fr 1fr; }
 
   .top-bar { flex-direction: column; align-items: flex-start; }
+}
+/* ---------- BUSINESS SUITE ---------- */
+
+.header-right{
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+}
+
+.brand p{
+
+color:#94a3b8;
+
+margin-top:5px;
+
+font-size:14px;
+
+}
+
+.project-card{
+
+background:#161b22;
+
+padding:28px;
+
+border-radius:18px;
+
+border:1px solid rgba(255,255,255,.06);
+
+margin-bottom:35px;
+
+box-shadow:0 10px 35px rgba(0,0,0,.25);
+
+}
+
+.project-card h2{
+
+margin-bottom:25px;
+
+font-size:24px;
+
+}
+
+.project-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+}
+
+.project-grid label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-size:13px;
+
+color:#94a3b8;
+
+}
+
+.project-grid input,
+
+.project-grid select{
+
+width:100%;
+
+padding:14px;
+
+background:#0f172a;
+
+border:1px solid #263244;
+
+border-radius:12px;
+
+color:white;
+
+font-size:15px;
+
+outline:none;
+
+transition:.2s;
+
+}
+
+.project-grid input:focus,
+
+.project-grid select:focus{
+
+border-color:#5B4FE8;
+
+box-shadow:0 0 0 4px rgba(91,79,232,.15);
+
+}
+
+.admin-card{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:flex-end;
+
+}
+
+.admin-title{
+
+font-size:12px;
+
+color:#94a3b8;
+
+}
+
+#admin-email{
+
+font-weight:600;
+
+font-size:15px;
+
+}
+
+#logout{
+
+background:#dc2626;
+
+padding:12px 22px;
+
+border-radius:12px;
+
+transition:.25s;
+
+}
+
+#logout:hover{
+
+transform:translateY(-2px);
+
+background:#ef4444;
+
+}
+
+#exportPdf{
+
+background:#5B4FE8;
+
+color:white;
+
+font-weight:600;
+
+padding:16px 35px;
+
+border-radius:14px;
+
+transition:.25s;
+
+}
+
+#exportPdf:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 12px 25px rgba(91,79,232,.35);
+
+}
+
+.metric{
+
+border-radius:16px;
+
+}
+
+.section-label{
+
+font-size:20px;
+
+margin-bottom:18px;
+
 }
