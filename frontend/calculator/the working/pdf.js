@@ -4,33 +4,7 @@
    Depends on main.js being loaded first.
    ============================================= */
 
-/* Convert a local image path to a base64 data-URL so html2canvas
-   can render it without cross-origin issues.                        */
-async function imageToBase64(src) {
-  try {
-    const resp = await fetch(src);
-    const blob = await resp.blob();
-    return await new Promise(function (resolve, reject) {
-      const reader = new FileReader();
-      reader.onload  = function () { resolve(reader.result); };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  } catch (e) {
-    console.warn("Logo load failed, using text fallback:", e);
-    return null;
-  }
-}
-
 async function exportPDF() {
-
-  /* ── 0. Load logo ─────────────────────────── */
-  /* Adjust the path to match where suite.html lives relative to assets */
-  const logoBase64 = await imageToBase64("../assets/logo.png");
-
-  const logoHTML = logoBase64
-    ? '<img src="' + logoBase64 + '" style="max-height:60px;max-width:220px;display:block;" alt="Logo" />'
-    : '<div style="font-size:28px;font-weight:bold;color:#5B4FE8;letter-spacing:2px;">DIGITAL ZN</div>';
 
   /* ── 1. Read form values ──────────────────── */
   const client   = document.getElementById("client-name").value.trim()  || "Unknown Client";
@@ -85,7 +59,8 @@ async function exportPDF() {
     '<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-bottom:20px;border-bottom:3px solid #5B4FE8;padding-bottom:16px;">' +
       '<tr>' +
         '<td style="vertical-align:middle;">' +
-          logoHTML +
+          '<div style="font-size:28px;font-weight:bold;color:#5B4FE8;letter-spacing:2px;margin-bottom:4px;">DIGITAL ZN</div>' +
+          '<div style="font-size:14px;color:#888;">Creative Digital Solutions</div>' +
         '</td>' +
         '<td align="right" style="vertical-align:middle;">' +
           '<div style="font-size:20px;font-weight:bold;color:#333;">QUOTATION</div>' +
