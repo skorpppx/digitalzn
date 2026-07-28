@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital ZN — Checklist + Profit Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<header class="suite-header">
+
+    <div class="brand">
+
+        <h1>Digital <span>ZN</span></h1>
+
+        <p>Project Profit Calculator</p>
+
+    </div>
+
+    <div class="header-right">
+
+        <div class="admin-card">
+
+            <div class="admin-title">
+                Logged in as
+            </div>
+
+            <div id="admin-email">
+                Loading...
+            </div>
+
+        </div>
+
+        <button id="logout">
+            Logout
+        </button>
+
+    </div>
+
+</header>
+</header>
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="top-bar">
+      <div class="mode-toggle">
+        <button class="mode-btn active" onclick="setMode('alacarte')" id="btn-alacarte">À la carte</button>
+        <button class="mode-btn" onclick="setMode('package')" id="btn-package">Packages</button>
+      </div>
+    </div>
+<section class="project-card">
+
+<h2>Project Information</h2>
+
+<div class="project-grid">
+
+<div>
+
+<label>Client Name</label>
+
+<input
+id="client-name"
+placeholder="Atlas Company">
+
+</div>
+
+<div>
+
+<label>Project Name</label>
+
+<input
+id="project-name"
+placeholder="Website Redesign">
+
+</div>
+
+<div>
+
+<label>Date</label>
+
+<input
+id="project-date"
+type="date">
+
+</div>
+
+<div>
+
+<label>Currency</label>
+
+<select id="currency">
+
+<option>MAD</option>
+
+<option>EUR</option>
+
+<option>USD</option>
+
+</select>
+
+</div>
+
+</div>
+
+</section>
+
+    <!-- Services List -->
+    <div id="services-wrap"></div>
+
+    <!-- Custom Service -->
+    <div style="margin-top:10px">
+      <div class="section-label">Add custom service</div>
+      <div class="custom-row">
+        <input id="custom-name" placeholder="Service name" />
+        <input id="custom-price" type="number" placeholder="Price (DH)" min="0" />
+        <button class="add-btn" onclick="addCustom()">+ Add</button>
+      </div>
+    </div>
+
+    <!-- Costs -->
+    <div class="section-label" style="margin-top:1.5rem">Costs to deduct</div>
+    <div class="costs-row">
+      <div>
+        <label>Tool costs (Adobe, hosting…)</label>
+        <input id="cost-tools" type="number" value="200" min="0" oninput="recalc()" />
+      </div>
+      <div>
+        <label>Operating costs (domain, ads…)</label>
+        <input id="cost-ops" type="number" value="100" min="0" oninput="recalc()" />
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Summary Metrics -->
+    <div id="summary-section">
+      <div class="summary-grid">
+        <div class="metric">
+          <div class="metric-label">Invoice total</div>
+          <div class="metric-val" id="m-invoice">0 DH</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Total costs</div>
+          <div class="metric-val amber" id="m-costs">300 DH</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Net profit</div>
+          <div class="metric-val green" id="m-net">0 DH</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">+40% margin added</div>
+          <div class="metric-val purple" id="m-margin">0 DH</div>
+        </div>
+      </div>
+
+      <!-- Recommended Price -->
+      <div class="recommend-card">
+        <div class="metric-label">Recommended client price (base + 40%)</div>
+        <div class="recommend-inner">
+          <div class="metric-val purple big" id="m-recommend">0 DH</div>
+          <div class="profit-badge" id="m-profit-badge">Profit: 0 DH</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <!-- pdf section -->
+<button id="exportPdf">
+
+<svg width="18" height="18" fill="none">
+
+</svg>
+
+Export Professional PDF
+
+</button>
+      <!-- Profit Split -->
+      <div class="section-label">Profit split</div>
+      <div class="toggle-row">
+        <span class="toggle-label">Split method:</span>
+        <button class="split-type-btn active" onclick="setSplit('contribution')" id="sb-contribution">Option A — Contribution</button>
+        <button class="split-type-btn" onclick="setSplit('equal')" id="sb-equal">Option B — Equal 33/33/33</button>
+      </div>
+      <div class="split-grid" id="split-grid"></div>
+
+      <button class="clear-btn" onclick="clearAll()">Clear selection</button>
+    </div>
+
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="pdf.js"></script>
+  <script src="main.js"></script>
+  <script src="suite.js"></script>
+</body>
+
+</html>

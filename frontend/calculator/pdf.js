@@ -1,322 +1,168 @@
-function money(value, currency) {
+/* =============================================
+   Digital ZN — PDF Export
+   pdf.js  (depends on main.js being loaded first)
+   ============================================= */
 
-    const number = Number(value) || 0;
+/**
+ * Build a table-only HTML string for the PDF.
+ * html2canvas has limited CSS support; we use only tables + inline styles.
+ * Uses getSelectedServices(), fmt(), getInvoice(), getCosts(), getNetProfit() from main.js.
+ */
+function buildPDFHtml() {
+  const client   = document.getElementById("client-name").value.trim()  || "Unknown Client";
+  const project  = document.getElementById("project-name").value.trim() || "Untitled Project";
+  const date     = document.getElementById("project-date").value        || "-";
+  const currency = document.getElementById("currency").value            || "DH";
 
-    return `${number.toLocaleString("fr-FR")} ${currency}`;
+  const invoice   = getInvoice();
+  const costs     = getCosts();
+  const net       = getNetProfit();
+  const margin    = Math.round(net * 0.40);
+  const recommend = net + margin;
 
-}
-function createHeader() {
+  /* ── Services rows ─────────────────────── */
+  const services = getSelectedServices();
+  let serviceRows = "";
 
-    return `
-
-        <div style="text-align:center;margin-bottom:35px;">
-
-            <h1 style="margin:0;color:#5B4FE8;font-size:34px;">
-                DIGITAL ZN
-            </h1>
-
-            <div style="color:#666;font-size:18px;">
-                Project Quotation
-            </div>
-
-        </div>
-
-    `;
-
-}
-function createInfo(client, project, date) {
-
-    return `
-
-        <div style="margin-bottom:30px;">
-
-            <p><b>Client :</b> ${client}</p>
-
-            <p><b>Project :</b> ${project}</p>
-
-            <p><b>Date :</b> ${date}</p>
-
-        </div>
-
-    `;
-
-}
-function createServicesTable(services) {
-
-    let rows = "";
-
-    services.forEach(service => {
-
-        rows += `
-
-            <tr>
-
-                <td>${service.name}</td>
-
-                <td>${money(service.price, service.currency)}</td>
-
-            </tr>
-
-        `;
-
-    });
-
-    return `
-
-        <h2>Services</h2>
-
-        <table
-        style="width:100%;
-        border-collapse:collapse;">
-
-            <thead>
-
-                <tr>
-
-                    <th align="left">Service</th>
-
-                    <th align="right">Price</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                ${rows}
-
-            </tbody>
-
-        </table>
-
-    `;
-
-}
-
-
-function createServicesTable(currency) {
-
-    const services = getSelectedServices();
-
-    if (services.length === 0) {
-
-        return "<p>No selected services.</p>";
-
-    }
-
-    let rows = "";
-
-    services.forEach(service => {
-
-        rows += `
-
+  if (services.length === 0) {
+    serviceRows = `
+      <tr>
+        <td colspan="4"
+            style="padding:12px;text-align:center;color:#888;font-style:italic;">
+          No services selected.
+        </td>
+      </tr>`;
+  } else {
+    services.forEach(function(s) {
+      serviceRows += `
         <tr>
-
-            <td>${service.name}</td>
-
-            <td>${service.qty}</td>
-
-            <td>${fmt(service.price)}</td>
-
-            <td>${fmt(service.total)}</td>
-
-        </tr>
-
-        `;
-
+          <td style="padding:10px 12px;border-bottom:1px solid #eee;">${s.name}</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:center;">${s.qty}</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:right;">${fmt(s.price)}</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:right;font-weight:bold;">${fmt(s.total)}</td>
+        </tr>`;
     });
+  }
 
-    return `
+  /* ── Full document HTML ─────────────────── */
+  return `
+<div style="
+  width: 780px;
+  background: white;
+  padding: 50px 60px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #222;
+  line-height: 1.6;
+">
 
-        <h2>Selected Services</h2>
+  <!-- === HEADER === -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border-bottom:3px solid #5B4FE8;padding-bottom:18px;">
+    <tr>
+      <td style="vertical-align:middle;">
+        <div style="font-size:30px;font-weight:bold;color:#5B4FE8;letter-spacing:2px;">DIGITAL ZN</div>
+        <div style="font-size:15px;color:#888;margin-top:2px;">Creative Digital Solutions</div>
+      </td>
+      <td align="right" style="vertical-align:middle;">
+        <div style="font-size:20px;font-weight:bold;color:#333;">QUOTATION</div>
+        <div style="font-size:12px;color:#aaa;margin-top:4px;">DZN-${Date.now().toString().slice(-6)}</div>
+      </td>
+    </tr>
+  </table>
 
-        <table style="width:100%;border-collapse:collapse;margin-top:15px;">
+  <!-- === CLIENT / PROJECT INFO === -->
+  <table width="100%" cellpadding="0" cellspacing="0"
+         style="background:#f7f7f7;border-radius:6px;margin-bottom:28px;padding:18px;">
+    <tr>
+      <td width="33%" style="padding:0 12px 0 0;vertical-align:top;">
+        <div style="font-size:11px;text-transform:uppercase;color:#999;letter-spacing:1px;margin-bottom:4px;">Client</div>
+        <div style="font-size:16px;font-weight:bold;color:#111;">${client}</div>
+      </td>
+      <td width="33%" style="padding:0 12px;vertical-align:top;">
+        <div style="font-size:11px;text-transform:uppercase;color:#999;letter-spacing:1px;margin-bottom:4px;">Project</div>
+        <div style="font-size:16px;font-weight:bold;color:#111;">${project}</div>
+      </td>
+      <td width="33%" style="padding:0 0 0 12px;vertical-align:top;">
+        <div style="font-size:11px;text-transform:uppercase;color:#999;letter-spacing:1px;margin-bottom:4px;">Date</div>
+        <div style="font-size:16px;font-weight:bold;color:#111;">${date}</div>
+      </td>
+    </tr>
+  </table>
 
-            <thead>
+  <!-- === SERVICES TABLE === -->
+  <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#666;margin-bottom:8px;font-weight:bold;">Services</div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-bottom:28px;">
+    <thead>
+      <tr style="background:#5B4FE8;color:white;">
+        <th align="left"  style="padding:10px 12px;">Service</th>
+        <th align="center" style="padding:10px 12px;">Qty</th>
+        <th align="right"  style="padding:10px 12px;">Unit Price</th>
+        <th align="right"  style="padding:10px 12px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${serviceRows}
+    </tbody>
+  </table>
 
-                <tr>
+  <!-- === SUMMARY TABLE === -->
+  <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#666;margin-bottom:8px;font-weight:bold;">Summary</div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+    <tr>
+      <td style="padding:9px 0;border-bottom:1px solid #eee;color:#555;">Project Total</td>
+      <td align="right" style="padding:9px 0;border-bottom:1px solid #eee;font-weight:bold;">${fmt(invoice)}</td>
+    </tr>
+    <tr>
+      <td style="padding:9px 0;border-bottom:1px solid #eee;color:#555;">Business Costs</td>
+      <td align="right" style="padding:9px 0;border-bottom:1px solid #eee;font-weight:bold;color:#BA7517;">${fmt(costs)}</td>
+    </tr>
+    <tr>
+      <td style="padding:9px 0;border-bottom:1px solid #eee;color:#555;">Estimated Profit</td>
+      <td align="right" style="padding:9px 0;border-bottom:1px solid #eee;font-weight:bold;color:#1D9E75;">${fmt(net)}</td>
+    </tr>
+    <tr>
+      <td style="padding:12px;background:#5B4FE8;color:white;font-weight:bold;font-size:15px;">
+        Recommended Price
+        <span style="font-size:11px;font-weight:normal;opacity:0.8;">(base + 40% margin)</span>
+      </td>
+      <td align="right"
+          style="padding:12px;background:#5B4FE8;color:white;font-weight:bold;font-size:18px;">
+        ${fmt(recommend)}
+      </td>
+    </tr>
+  </table>
 
-                    <th align="left">Service</th>
+  <!-- === FOOTER === -->
+  <table width="100%" cellpadding="0" cellspacing="0"
+         style="margin-top:40px;padding-top:16px;border-top:1px solid #eee;">
+    <tr>
+      <td align="center" style="color:#aaa;font-size:12px;">
+        <span style="color:#5B4FE8;font-weight:bold;">Digital ZN</span>
+        &nbsp;&mdash;&nbsp;Creative Digital Solutions
+        &nbsp;|&nbsp; contact@digital-zn.com
+        &nbsp;|&nbsp; www.digital-zn.com
+      </td>
+    </tr>
+  </table>
 
-                    <th>Qty</th>
-
-                    <th align="right">Unit Price</th>
-
-                    <th align="right">Total</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                ${rows}
-
-            </tbody>
-
-        </table>
-
-    `;
-
+</div>`;
 }
 
-
-
-
+/**
+ * Generate and download a PDF quotation using html2pdf.js.
+ * Passes an HTML string so html2pdf manages DOM insertion itself.
+ */
 async function exportPDF() {
+  const client = document.getElementById("client-name").value.trim() || "Unknown-Client";
 
-    const client =
-        document.getElementById("client-name").value || "Unknown Client";
+  const opts = {
+    filename:    "DigitalZN-" + client.replace(/\s+/g, "-") + ".pdf",
+    margin:      10,
+    image:       { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, logging: false },
+    jsPDF:       { unit: "mm", format: "a4", orientation: "portrait" }
+  };
 
-    const project =
-        document.getElementById("project-name").value || "Untitled Project";
-
-    const date =
-        document.getElementById("project-date").value;
-
-    const currency =
-        document.getElementById("currency").value;
-
-    const invoice = getInvoice();
-    const costs = getCosts();
-    const net = getNetProfit();
-    const margin = Math.round(net * 0.40);
-    const recommend = net + margin;
-
-    const quotation = document.createElement("div");
-console.log(getItems());
-
-console.log(checked);
-
-console.log(qtys);
-
-console.log(getInvoice());
-
-console.log(getSelectedServices());
-    quotation.style.width = "800px";
-    quotation.style.background = "white";
-    quotation.style.padding = "50px";
-    quotation.style.fontFamily = "Arial";
-    quotation.style.color = "#222";
-
-    quotation.innerHTML = `
-
-        <h1 style="text-align:center;color:#5B4FE8;">
-
-            DIGITAL ZN
-
-        </h1>
-
-        <h3 style="text-align:center;">
-
-            Project Quotation
-
-        </h3>
-
-        <hr>
-
-        <p><strong>Client:</strong> ${client}</p>
-
-        <p><strong>Project:</strong> ${project}</p>
-
-        <p><strong>Date:</strong> ${date}</p>
-
-        ${createServicesTable(currency)}
-
-        <hr>
-
-        <h2>Summary</h2>
-
-        <table style="width:100%;">
-
-            <tr>
-
-                <td>Project Total</td>
-
-                <td align="right">${fmt(invoice)}</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Business Costs</td>
-
-                <td align="right">${fmt(costs)}</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Estimated Profit</td>
-
-                <td align="right">${fmt(net)}</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Recommended Price</td>
-
-                <td align="right">${fmt(recommend)}</td>
-
-            </tr>
-
-        </table>
-
-        <hr>
-
-        <div style="text-align:center;">
-
-            Generated by Digital ZN Business Suite
-
-        </div>
-
-    `;
-
-    document.body.appendChild(quotation);
-    console.log(quotation.outerHTML);
-
-quotation.style.display = "block";
-
-quotation.style.position = "fixed";
-
-quotation.style.top = "20px";
-
-quotation.style.left = "20px";
-
-quotation.style.zIndex = "99999";
-document.body.appendChild(quotation);
-
-await new Promise(resolve => setTimeout(resolve, 300));
-
-await html2pdf()
-.set({
-
-    filename: `DigitalZN-${client}.pdf`,
-
-    margin: 8,
-
-    image: {
-        type: "jpeg",
-        quality: 1
-    },
-
-    html2canvas: {
-        scale: 2,
-        useCORS: true,
-        logging: false
-    },
-
-    jsPDF: {
-        unit: "mm",
-        format: "a4",
-        orientation: "portrait"
-    }
-
-})
-.from(quotation)
-.save();
-
-quotation.remove();
-
+  // Pass as string — html2pdf handles appending/removing the element
+  await html2pdf().from(buildPDFHtml()).set(opts).save();
 }
