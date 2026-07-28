@@ -14,7 +14,6 @@
     <h1>Digital <span>ZN</span></h1>
     <p>Project Profit Calculator</p>
   </div>
-
   <div class="header-right">
     <div class="admin-card">
       <div class="admin-title">Logged in as</div>
@@ -153,9 +152,11 @@
 
 </div>
 
-<!-- html2pdf library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<!-- Calculator logic + auth (must come before pdf.js) -->
+<!-- html2canvas: renders DOM to canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- jsPDF: builds the PDF from the canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- Calculator logic + auth (must load before pdf.js) -->
 <script src="main.js"></script>
 <!-- PDF export -->
 <script src="pdf.js"></script>
