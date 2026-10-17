@@ -3,29 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital ZN — Checklist + Profit Calculator</title>
+  <title>Digital ZN — Project Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="../assets/logo.png" />
 </head>
-
 <body>
 
+<!-- ═══ HEADER ═══ -->
 <header class="suite-header">
-  <div class="brand">
-    <h1>Digital <span>ZN</span></h1>
-    <p>Project Profit Calculator</p>
-  </div>
+  <a href="../index.html" class="header-brand">
+    <img src="../assets/logo.png" alt="Digital ZN" class="header-logo-img" />
+    <div>
+      <div class="header-wordmark">Digital<span>ZN</span></div>
+      <div class="header-subtitle">Project Calculator</div>
+    </div>
+  </a>
+
   <div class="header-right">
     <div class="admin-card">
-      <div class="admin-title">Logged in as</div>
-      <div id="admin-email">Loading...</div>
+      <div class="admin-card-label">Logged in as</div>
+      <div class="admin-card-email" id="admin-email">Loading…</div>
     </div>
-    <button id="logout">Logout</button>
+    <button id="logout" class="btn-logout">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Logout
+    </button>
   </div>
 </header>
 
+<!-- ═══ MAIN CONTENT ═══ -->
 <div class="wrap">
 
-  <!-- Mode Toggle -->
+  <!-- Mode toggle -->
   <div class="top-bar">
     <div class="mode-toggle">
       <button class="mode-btn active" onclick="setMode('alacarte')" id="btn-alacarte">À la carte</button>
@@ -35,25 +47,26 @@
 
   <!-- Project Info -->
   <section class="project-card">
-    <h2>Project Information</h2>
+    <div class="project-card-header">
+      <div class="project-card-kicker">
+        <span class="kicker-dot"></span>
+        Project Details
+      </div>
+    </div>
     <div class="project-grid">
-
-      <div>
+      <div class="field-block">
         <label>Client Name</label>
-        <input id="client-name" placeholder="Atlas Company">
+        <input id="client-name" placeholder="Atlas Company" />
       </div>
-
-      <div>
+      <div class="field-block">
         <label>Project Name</label>
-        <input id="project-name" placeholder="Website Redesign">
+        <input id="project-name" placeholder="Website Redesign" />
       </div>
-
-      <div>
+      <div class="field-block">
         <label>Date</label>
-        <input id="project-date" type="date">
+        <input id="project-date" type="date" />
       </div>
-
-      <div>
+      <div class="field-block">
         <label>Currency</label>
         <select id="currency">
           <option>MAD</option>
@@ -61,7 +74,6 @@
           <option>USD</option>
         </select>
       </div>
-
     </div>
   </section>
 
@@ -69,8 +81,8 @@
   <div id="services-wrap"></div>
 
   <!-- Custom Service -->
-  <div style="margin-top:10px">
-    <div class="section-label">Add custom service</div>
+  <div class="custom-service-section">
+    <div class="section-eyebrow">Add custom service</div>
     <div class="custom-row">
       <input id="custom-name" placeholder="Service name" />
       <input id="custom-price" type="number" placeholder="Price" min="0" />
@@ -79,57 +91,57 @@
   </div>
 
   <!-- Costs -->
-  <div class="section-label" style="margin-top:1.5rem">Costs to deduct</div>
-  <div class="costs-row">
-    <div>
-      <label>Tool costs (Adobe, hosting…)</label>
-      <input id="cost-tools" type="number" value="200" min="0" oninput="recalc()" />
+  <section class="costs-section">
+    <div class="section-eyebrow">Costs to deduct</div>
+    <div class="costs-row">
+      <div class="field-block">
+        <label>Tool costs <span class="label-hint">(Adobe, hosting…)</span></label>
+        <input id="cost-tools" type="number" value="200" min="0" oninput="recalc()" />
+      </div>
+      <div class="field-block">
+        <label>Operating costs <span class="label-hint">(domain, ads…)</span></label>
+        <input id="cost-ops" type="number" value="100" min="0" oninput="recalc()" />
+      </div>
     </div>
-    <div>
-      <label>Operating costs (domain, ads…)</label>
-      <input id="cost-ops" type="number" value="100" min="0" oninput="recalc()" />
-    </div>
-  </div>
+  </section>
 
   <div class="divider"></div>
 
-  <!-- Summary Metrics -->
+  <!-- Summary -->
   <div id="summary-section">
     <div class="summary-grid">
       <div class="metric">
-        <div class="metric-label">Invoice total</div>
-        <div class="metric-val" id="m-invoice">0 MAD</div>
+        <div class="metric-label">Invoice Total</div>
+        <div class="metric-val" id="m-invoice">0 DH</div>
       </div>
       <div class="metric">
-        <div class="metric-label">Total costs</div>
-        <div class="metric-val amber" id="m-costs">300 MAD</div>
+        <div class="metric-label">Total Costs</div>
+        <div class="metric-val amber" id="m-costs">300 DH</div>
       </div>
       <div class="metric">
-        <div class="metric-label">Net profit</div>
-        <div class="metric-val green" id="m-net">0 MAD</div>
+        <div class="metric-label">Net Profit</div>
+        <div class="metric-val green" id="m-net">0 DH</div>
       </div>
       <div class="metric">
-        <div class="metric-label">+40% margin added</div>
-        <div class="metric-val purple" id="m-margin">0 MAD</div>
+        <div class="metric-label">+40% Margin</div>
+        <div class="metric-val purple" id="m-margin">0 DH</div>
       </div>
     </div>
 
     <!-- Recommended Price -->
     <div class="recommend-card">
-      <div class="metric-label">Recommended client price (base + 40%)</div>
+      <div class="recommend-label">Recommended client price <span class="recommend-hint">(base + 40%)</span></div>
       <div class="recommend-inner">
-        <div class="metric-val purple big" id="m-recommend">0 MAD</div>
-        <div class="profit-badge" id="m-profit-badge">Profit: 0 MAD</div>
+        <div class="metric-val purple big" id="m-recommend">0 DH</div>
+        <div class="profit-badge" id="m-profit-badge">Profit: 0 DH</div>
       </div>
     </div>
 
     <div class="divider"></div>
 
     <!-- Export PDF -->
-    <button id="exportPdf">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-           style="vertical-align:middle;margin-right:8px;">
+    <button id="exportPdf" class="btn-export">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
         <polyline points="14 2 14 8 20 8"/>
         <line x1="12" y1="18" x2="12" y2="12"/>
@@ -139,7 +151,7 @@
     </button>
 
     <!-- Profit Split -->
-    <div class="section-label" style="margin-top:1.5rem">Profit split</div>
+    <div class="section-eyebrow" style="margin-top: 2rem">Profit split</div>
     <div class="toggle-row">
       <span class="toggle-label">Split method:</span>
       <button class="split-type-btn active" onclick="setSplit('contribution')" id="sb-contribution">Option A — Contribution</button>
@@ -150,16 +162,13 @@
     <button class="clear-btn" onclick="clearAll()">Clear selection</button>
   </div>
 
-</div>
+</div><!-- /wrap -->
 
-<!-- html2canvas: renders DOM to canvas -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<!-- jsPDF: builds the PDF from the canvas -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<!-- Calculator logic + auth (must load before pdf.js) -->
-<script src="main.js"></script>
-<!-- PDF export -->
 <script src="pdf.js"></script>
+<script src="main.js"></script>
+<script src="suite.js"></script>
 
 </body>
 </html>

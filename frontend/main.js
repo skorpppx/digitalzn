@@ -1,706 +1,917 @@
-/* =========================================
-   Digital ZN — Main JavaScript
-   ========================================= */
-// ==========================================
-// API Configuration
-// ==========================================
+/* ============================================
+   DIGITAL ZN v2 java script yeeey
+============================================ */
+'use strict';
 
+/* ============================================
+   BACKEND API
+============================================ */
 const API = {
-
-    BASE_URL: "https://digitalzn-production.up.railway.app",
-
-    CONTACT: "/api/contact"
-
+  BASE_URL: 'https://digitalzn-production.up.railway.app',
+  CONTACT: '/api/contact'
 };
-/* ── Translations ── */
-const i18n = {
+
+/* ============================================
+   TRANSLATIONS
+============================================ */
+const LANG = {
   en: {
-    nav: { home: 'Home', services: 'Services', portfolio: 'Portfolio', about: 'About', contact: 'Contact' },
-    hero: {
-      badge: 'Digital Marketing Agency',
-      the: 'The', feed: 'Feed',
-      we: 'We', lead: 'Lead',
-      tagline: 'Digital excellence meets creative power.',
-      sub: 'Creative digital agency based in Morocco. We design, build, and film for brands that want to stand out.',
-      cta: 'Start Your Journey', see: 'See Our Portfolio', scroll: 'Scroll to explore',
-    },
-    services: {
-      title: 'What We Do',
-      subtitle: 'End-to-end digital solutions for brands that dare to lead.',
-      items: [
-        {icon: '📱',id: 'social-media-design', title: 'Social Media Design', desc: 'Eye-catching posts, stories, covers, and templates tailored for your brand voice across all platforms.', num: '01' },
-        {icon: '🖨️',id: 'graphic-design',      title: 'Graphic Design',      desc: 'Print-on-demand, books, roll-ups, brochures, animated PowerPoint presentations, and more.', num: '02' },
-        {icon: '💎', id: 'brand-identity',      title: 'Brand Identity',      desc: 'Full brand systems — concept, logo, color palette, typography, mockups, and brand guidelines.', num: '03' },
-        {icon: '🌐', id: 'landing-pages',       title: 'Landing Pages',       desc: 'High-converting landing pages built with HTML, CSS & JavaScript — clean, fast, and responsive.', num: '04' },
-        {icon: '🎬', id: 'video-editing',       title: 'Video Editing',       desc: 'Professional video editing for reels, ads, and promotional content that captivates your audience.', num: '05' },
-        {icon: '🎥', id: 'videography',         title: 'Videography',         desc: 'Photography and videography sessions to produce stunning visual content for your brand.', num: '06' },
-      ],
-    },
-    stats: {
-      label: 'By The Numbers',
-      title: 'The Numbers Speak',
-      items: [
-        { value: 100, suffix: '%', label: 'Commitment' },
-        { value: 6,   suffix: '',  label: 'Services' },
-        { value: 3,   suffix: '',  label: 'Experts' },
-      ],
-    },
-    portfolio: {
-      title: 'Selected Portfolio',
-      subtitle: 'A glimpse of projects we are proud of. Click any item to view it.',
-      viewAll: 'View All Portfolio →',
-      visit: 'View project',
-    },
-    about: {
-      title: 'We Are Digital ZN',
-      body: 'Born in the digital age, Digital ZN is a full-service creative and digital marketing agency. We partner with ambitious brands to craft strategies that cut through the noise and lead the conversation. Our team of strategists, creators, and technologists work in sync — turning visions into viral moments.',
-      vision: 'Our vision is simple: to lead the feed wherever our clients are present.',
-      pillars: ['Creative Excellence','Data-Driven Results','Cultural Intelligence','Speed to Market','Transparent Partnership','Measurable ROI'],
-    },
-    contact: {
-      title: "Let's Build Something Great",
-      subtitle: 'Ready to lead the feed? Tell us about your project.',
-      name: 'Your Name', email: 'Your Email', msg: 'Tell us about your project...',
-      servicesLabel: "Services you're interested in (select one or more)",
-      servicesError: 'Please select at least one service.',
-      send: 'Send Message',
-      sending: 'Sending...',
-      successTitle: 'Message Sent!', successMsg: "We'll get back to you within 24 hours.",
-      errInvalid: 'Please fill in all fields with valid information.',
-      errEmail: 'Please enter a valid email address.',
-      errLength: 'Message must be between 10 and 2000 characters.',
-      errRate: 'You just sent a message. Please wait a moment before sending another.',
-    },
-    footer: { tagline: '"We Lead The Feed"', rights: 'All rights reserved.' },
+    nav_home:      'Home',
+    nav_services:  'Services',
+    nav_portfolio: 'Portfolio',
+    showcase_label: '01 — Some of our latest work',
+    nav_about:     'About',
+    nav_cta:       'Let\'s Talk',
+    scroll_hint:   'Scroll to explore',
+    hero_badge:    'Digital Marketing Agency',
+    hero_t1:       'WE LEAD',
+    hero_t2:       'THE FEED',
+    hero_sub:      'Creative digital agency based in Morocco. We design, build, and film for brands that want to stand out.',
+    hero_cta1:     'Start Your Journey',
+    hero_cta2:     'See Our Portfolio',
+    reel_label:    'Showreel 2025',
+    srv_label:     '02 — Services',
+    srv_title:     'What We Do',
+    srv_sub:       'End-to-end digital solutions for brands that dare to lead.',
+    srv1_name:     'Social Media Design',
+    srv1_desc:     'Eye-catching posts, stories, covers, and templates tailored for your brand voice across all platforms.',
+    srv2_name:     'Graphic Design',
+    srv2_desc:     'Print-on-demand, books, roll-ups, brochures, animated PowerPoint presentations, and more.',
+    srv3_name:     'Brand Identity',
+    srv3_desc:     'Full brand systems — concept, logo, color palette, typography, mockups, and brand guidelines.',
+    srv4_name:     'Landing Pages',
+    srv4_desc:     'High-converting landing pages built with HTML, CSS & JavaScript — clean, fast, and responsive.',
+    srv5_name:     'Video Editing',
+    srv5_desc:     'Professional video editing for reels, ads, and promotional content that captivates your audience.',
+    srv6_name:     'Videography',
+    srv6_desc:     'Photography and videography sessions to produce stunning visual content for your brand.',
+    srv_link:      'Learn more →',
+    srv1_dialog_title: 'Social Media Design — Strategy & Content',
+    srv1_dialog_desc: 'We create scroll-stopping social content systems tailored to your brand voice, including campaign concepts, post designs, stories, templates, and platform-ready creative direction.',
+    srv2_dialog_title: 'Graphic Design — Visual Systems',
+    srv2_dialog_desc: 'From editorial and print design to presentations and campaign assets, we build clear visual systems that keep every brand touchpoint consistent and memorable.',
+    srv3_dialog_title: 'Brand Identity — Build the System',
+    srv3_dialog_desc: 'We turn your positioning into a complete visual identity: concept, logo direction, color, typography, mockups, and practical brand guidelines for everyday use.',
+    srv4_dialog_title: 'Landing Pages — Designed to Convert',
+    srv4_dialog_desc: 'We design and build focused landing experiences with strong hierarchy, responsive layouts, clear calls to action, and fast front-end performance.',
+    srv5_dialog_title: 'Video Editing — Story in Motion',
+    srv5_dialog_desc: 'We shape raw footage into polished reels, ads, and promotional edits with rhythm, pacing, transitions, sound, and platform-specific finishing.',
+    srv6_dialog_title: 'Videography — Capture the Brand',
+    srv6_dialog_desc: 'We plan and shoot photography and video sessions that give your brand a strong visual library for campaigns, social content, products, and storytelling.',
+
+    pf_label:      '03 — Portfolio',
+    pf_title:      'Selected Portfolio',
+    pf_sub:        'A glimpse of campaigns that made markets move. Click any item to view it.',
+    pf1_cat:       'Branding',
+    pf1_name:      'Graphic Design Showcase',
+    pf2_cat:       'Video',
+    pf2_name:      'Editing & Videography',
+    pf3_cat:       'Web',
+    pf3_name:      'Web Development — Full Stack',
+    pf_view:       'View project',
+    pf_all:        'View All Portfolio →',
+    ab_label:      '04 — About',
+    ab_title:      'We Are Digital ZN',
+    ab_body:       'Born in the digital age, Digital ZN is a full-service creative and digital marketing agency. We partner with ambitious brands to craft strategies that cut through the noise and lead the conversation. Our team of strategists, creators, and technologists work in sync — turning visions into viral moments.',
+    ab_quote:      '"Our vision is simple: to lead the feed wherever our clients are present."',
+    p1: 'Creative Excellence',
+    p2: 'Data-Driven Results',
+    p3: 'Cultural Intelligence',
+    p4: 'Speed to Market',
+    p5: 'Transparent Partnership',
+    p6: 'Measurable ROI',
+    ct_label:      '05 — Contact',
+    ct_title:      "Let's Build Something Great",
+    ct_sub:        'Ready to lead the feed? Tell us about your project.',
+    ct_wa:         'Chat on WhatsApp',
+    form_name:     'Your Name',
+    form_email:    'Your Email',
+    form_phone:    '+123-456-789',
+    form_services: 'Services you\'re interested in',
+    form_msg:      'Tell us about your project...',
+    form_send:     'Send Message',
+    success_title: 'Message Sent!',
+    success_msg:   "We'll get back to you within 24 hours.",
+    footer_tagline: '"We Lead The Feed"',
+    footer_copy:   'All rights reserved.',
+    err_name:      'Please enter your name.',
+    err_email:     'Please enter a valid email address.',
+    err_msg:       'Please describe your project (at least 10 characters).',
+    card1_title: 'AI & Tech Branding',
+    card1_cat:   'Brand Identity',
+    card2_title: 'Beer Brand Campaign',
+    card2_cat:   'Social Media',
+    card3_title: 'Farm App UI/UX',
+    card3_cat:   'Web Design',
+    card4_title: 'Fintech Platform',
+    card4_cat:   'Landing Page',
+    card5_title: 'Real Estate Launch',
+    card5_cat:   'Video Production',
   },
 
   fr: {
-    nav: { home: 'Accueil', services: 'Services', portfolio: 'Portfolio', about: 'À Propos', contact: 'Contact' },
-    hero: {
-      badge: 'Agence de Marketing Digital',
-      the: 'The', feed: 'Feed',
-      we: 'We', lead: 'Lead',
-      tagline: "L'excellence numérique rencontre la puissance créative.",
-      sub: "Agence digitale créative basée au Maroc. Nous concevons, développons et réalisons des films pour les marques qui souhaitent se démarquer.",
-      cta: 'Commencer', see: 'Voir Notre Portfolio', scroll: 'Défiler pour explorer',
-    },
-    services: {
-      title: 'Ce Que Nous Faisons',
-      subtitle: 'Solutions digitales complètes pour les marques qui osent mener.',
-      items: [
-        {icon: '📱', id: 'social-media-design', title: 'Design pour Réseaux Sociaux', desc: 'Publications, stories, couvertures et modèles attrayants adaptés à la voix de votre marque sur toutes les plateformes.', num: '01' },
-        {icon: '🖨️',id: 'graphic-design',      title: 'Design Graphique', desc: 'Impression à la demande, livres, roll-ups, brochures, présentations PowerPoint animées, et plus encore.', num: '02' },
-        {icon: '💎', id: 'brand-identity',      title: 'Identité de Marque', desc: 'Systèmes de marque complets — concept, logo, palette de couleurs, typographie, maquettes et charte graphique.', num: '03' },
-        {icon: '🌐', id: 'landing-pages',       title: "Pages d'Atterrissage", desc: "Pages d'atterrissage à forte conversion créées avec HTML, CSS et JavaScript — propres, rapides et responsives.", num: '04' },
-        {icon: '🎬', id: 'video-editing',       title: 'Montage Vidéo', desc: 'Montage vidéo professionnel pour reels, publicités et contenus promotionnels qui captivent votre audience.', num: '05' },
-        {icon: '🎥', id: 'videography',         title: 'Vidéographie', desc: 'Séances de photographie et vidéographie pour produire un contenu visuel impressionnant pour votre marque.', num: '06' },
-      ],
-    },
-    stats: {
-      label: 'Par Les Chiffres',
-      title: 'Les Chiffres Parlent',
-      items: [
-        { value: 100, suffix: '%', label: 'Engagement' },
-        { value: 6,   suffix: '',  label: 'Services' },
-        { value: 3,   suffix: '',  label: 'Experts' },
-      ],
-    },
-    portfolio: {
-      title: 'Portfolio Sélectionné',
-      subtitle: "Un aperçu des projets dont nous sommes fiers. Cliquez sur un projet pour le voir.",
-      viewAll: 'Voir Tout →',
-      visit: 'Voir le projet',
-    },
-    about: {
-      title: 'Nous Sommes Digital ZN',
-      body: "Né à l'ère numérique, Digital ZN est une agence de marketing créatif et digital à service complet. Nous nous associons avec des marques ambitieuses pour créer des stratégies qui traversent le bruit et mènent la conversation.",
-      vision: "Notre vision est simple : mener le fil partout où nos clients sont présents.",
-      pillars: ['Excellence Créative','Résultats Data-Driven','Intelligence Culturelle','Rapidité de Mise en Marché','Partenariat Transparent','ROI Mesurable'],
-    },
-    contact: {
-      title: 'Construisons Quelque Chose de Grand',
-      subtitle: 'Prêt à mener le fil? Parlez-nous de votre projet.',
-      name: 'Votre Nom', email: 'Votre Email', msg: 'Parlez-nous de votre projet...',
-      servicesLabel: 'Services qui vous intéressent (sélectionnez un ou plusieurs)',
-      servicesError: 'Veuillez sélectionner au moins un service.',
-      send: 'Envoyer le Message',
-      sending: 'Envoi...',
-      successTitle: 'Message Envoyé!', successMsg: 'Nous vous répondrons dans les 24 heures.',
-      errInvalid: 'Veuillez remplir tous les champs avec des informations valides.',
-      errEmail: 'Veuillez entrer une adresse email valide.',
-      errLength: 'Le message doit contenir entre 10 et 2000 caractères.',
-      errRate: 'Vous venez d\'envoyer un message. Veuillez patienter avant d\'en envoyer un autre.',
-    },
-    footer: { tagline: '"We Lead The Feed"', rights: 'Tous droits réservés.' },
+    nav_home:      'Accueil',
+    nav_services:  'Services',
+    nav_portfolio: 'Portfolio',
+    nav_about:     'À Propos',
+    showcase_label: '01 — parmis les denier traveaux',
+    nav_cta:       'Parlons-en',
+    scroll_hint:   'Défiler pour explorer',
+    hero_badge:    'Agence de Marketing Digital',
+    hero_t1:       'NOUS MENONS',
+    hero_t2:       'LE FEED',
+    hero_sub:      'Agence créative basée au Maroc. Nous concevons, développons et filmons pour les marques qui veulent se démarquer.',
+    hero_cta1:     'Commencer',
+    hero_cta2:     'Voir Notre Portfolio',
+    reel_label:    'Showreel 2025',
+    srv_label:     '02 — Services',
+    srv_title:     'Ce Que Nous Faisons',
+    srv_sub:       'Solutions digitales de bout en bout pour les marques qui osent mener.',
+    srv1_name:     'Design Réseaux Sociaux',
+    srv1_desc:     'Publications, stories, couvertures et templates accrocheurs adaptés à la voix de votre marque.',
+    srv2_name:     'Design Graphique',
+    srv2_desc:     "Impression à la demande, livres, roll-ups, brochures, présentations PowerPoint animées et plus encore.",
+    srv3_name:     'Identité de Marque',
+    srv3_desc:     'Systèmes de marque complets — concept, logo, palette, typographie, mockups et charte graphique.',
+    srv4_name:     'Landing Pages',
+    srv4_desc:     'Pages à fort taux de conversion en HTML, CSS et JavaScript — épurées, rapides et responsives.',
+    srv5_name:     'Montage Vidéo',
+    srv5_desc:     'Montage professionnel pour reels, publicités et contenus promotionnels qui captivent.',
+    srv6_name:     'Vidéographie',
+    srv6_desc:     'Séances photo et vidéo pour produire des contenus visuels époustouflants pour votre marque.',
+    srv_link:      'En savoir plus →',
+    srv1_dialog_title: 'Design Réseaux Sociaux — Stratégie & Contenu',
+    srv1_dialog_desc: 'Nous créons des systèmes de contenu social qui attirent l’attention, adaptés à la voix de votre marque : concepts de campagnes, posts, stories, templates et direction créative.',
+    srv2_dialog_title: 'Design Graphique — Systèmes Visuels',
+    srv2_dialog_desc: 'De l’éditorial et de l’impression aux présentations et supports de campagne, nous construisons des systèmes visuels cohérents et mémorables.',
+    srv3_dialog_title: 'Identité de Marque — Construire le Système',
+    srv3_dialog_desc: 'Nous transformons votre positionnement en identité visuelle complète : concept, logo, couleurs, typographie, mockups et guidelines pratiques.',
+    srv4_dialog_title: 'Landing Pages — Pensées pour Convertir',
+    srv4_dialog_desc: 'Nous concevons et développons des landing pages ciblées avec une hiérarchie claire, des layouts responsives, des appels à l’action forts et de bonnes performances.',
+    srv5_dialog_title: 'Montage Vidéo — Le Storytelling en Mouvement',
+    srv5_dialog_desc: 'Nous transformons vos rushs en reels, publicités et contenus promotionnels soignés grâce au rythme, au sound design, aux transitions et au finishing.',
+    srv6_dialog_title: 'Vidéographie — Capturer la Marque',
+    srv6_dialog_desc: 'Nous préparons et réalisons des séances photo et vidéo pour créer une bibliothèque visuelle forte destinée aux campagnes, réseaux sociaux, produits et storytelling.',
+
+    pf_label:      '03 — Portfolio',
+    pf_title:      'Portfolio Sélectionné',
+    pf_sub:        "Un aperçu des campagnes qui ont fait bouger les marchés. Cliquez pour voir.",
+    pf1_cat:       'Branding',
+    pf1_name:      'Vitrine Design Graphique',
+    pf2_cat:       'Vidéo',
+    pf2_name:      'Montage & Vidéographie',
+    pf3_cat:       'Web',
+    pf3_name:      'Développement Web — Full Stack',
+    pf_view:       'Voir le projet',
+    pf_all:        'Tout le Portfolio →',
+    ab_label:      '04 — À Propos',
+    ab_title:      'Nous Sommes Digital ZN',
+    ab_body:       "Né à l'ère numérique, Digital ZN est une agence créative et de marketing digital full-service. Nous accompagnons les marques ambitieuses pour élaborer des stratégies qui tranchent et mènent la conversation. Notre équipe de stratèges, créatifs et technologues travaillent en synergie — transformant les visions en moments viraux.",
+    ab_quote:      '"Notre vision est simple : mener le feed partout où nos clients sont présents."',
+    p1: 'Excellence Créative',
+    p2: 'Résultats Fondés sur les Données',
+    p3: 'Intelligence Culturelle',
+    p4: 'Rapidité de Mise en Marché',
+    p5: 'Partenariat Transparent',
+    p6: 'ROI Mesurable',
+    ct_label:      '05 — Contact',
+    ct_title:      'Construisons Quelque Chose',
+    ct_sub:        'Prêt à mener le feed ? Parlez-nous de votre projet.',
+    ct_wa:         'Discuter sur WhatsApp',
+    form_name:     'Votre Nom',
+    form_email:    'Votre E-mail',
+    form_phone:    '+123-456-789',
+    form_services: 'Services qui vous intéressent',
+    form_msg:      'Parlez-nous de votre projet...',
+    form_send:     'Envoyer le Message',
+    success_title: 'Message Envoyé !',
+    success_msg:   'Nous vous répondrons dans les 24 heures.',
+    footer_tagline: '"Nous Menons Le Feed"',
+    footer_copy:   'Tous droits réservés.',
+    err_name:      'Veuillez entrer votre nom.',
+    err_email:     'Veuillez entrer une adresse e-mail valide.',
+    err_msg:       'Décrivez votre projet (au moins 10 caractères).',
+    card1_title: 'Branding IA & Tech',
+    card1_cat:   'Identité de Marque',
+    card2_title: 'Campagne Bière',
+    card2_cat:   'Réseaux Sociaux',
+    card3_title: 'UI/UX App Agricole',
+    card3_cat:   'Design Web',
+    card4_title: 'Plateforme Fintech',
+    card4_cat:   'Landing Page',
+    card5_title: 'Lancement Immobilier',
+    card5_cat:   'Production Vidéo',
   },
 
   ar: {
-    nav: { home: 'الرئيسية', services: 'الخدمات', portfolio: 'أعمالنا', about: 'من نحن', contact: 'اتصل بنا' },
-    hero: {
-      badge: 'وكالة تسويق رقمي',
-      the: 'نحن نَقُودُ',
-      we: '', lead: '',
-      feed: 'المحتوى',
-      tagline: 'حيث يلتقي التميز الرقمي بالقوة الإبداعية.',
-      sub: 'وكالة إبداعية رقمية مقرها المغرب. نقوم بالتصميم والبناء والتصوير للعلامات التجارية التي ترغب في التميز.',
-      cta: 'ابدأ رحلتك', see: 'شاهد أعمالنا', scroll: 'انتقل للاستكشاف',
-    },
-    services: {
-      title: 'ما نقدمه',
-      subtitle: 'حلول رقمية متكاملة للعلامات التجارية الجريئة.',
-      items: [
-        { icon: '📱',id: 'social-media-design', title: 'تصميم وسائل التواصل الاجتماعي', desc: 'منشورات وقصص وأغلفة وقوالب جذابة مصممة بما يتناسب مع هوية علامتك التجارية على جميع المنصات.', num: '01' },
-        { icon: '🖨️',id: 'graphic-design',      title: 'التصميم الجرافيكي', desc: 'الطباعة حسب الطلب، الكتب، الرول أب، الكتيبات، عروض PowerPoint المتحركة، والمزيد.', num: '02' },
-        { icon: '💎',id: 'brand-identity',      title: 'هوية العلامة التجارية', desc: 'أنظمة متكاملة للعلامة التجارية — الفكرة، الشعار، لوحة الألوان، الخطوط، النماذج الإعلانية، ودليل الهوية.', num: '03' },
-        { icon: '🌐',id: 'landing-pages',       title: 'صفحات الهبوط', desc: 'صفحات هبوط عالية التحويل مبنية باستخدام HTML وCSS وJavaScript — نظيفة، سريعة ومتجاوبة.', num: '04' },
-        { icon: '🎬',id: 'video-editing',       title: 'تحرير الفيديو', desc: 'تحرير فيديو احترافي للريلز والإعلانات والمحتوى الترويجي الذي يجذب جمهورك.', num: '05' },
-        { icon: '🎥',id: 'videography',         title: 'التصوير', desc: 'جلسات تصوير فوتوغرافي وفيديو لإنتاج محتوى بصري مميز لعلامتك التجارية.', num: '06' },
-      ],
-    },
-    stats: {
-      label: 'بالأرقام',
-      title: 'الأرقام تتكلم',
-      items: [
-        { value: 100, suffix: '%', label: 'الالتزام' },
-        { value: 6,   suffix: '',  label: 'الخدمات' },
-        { value: 3,   suffix: '',  label: 'الخبراء' },
-      ],
-    },
-    portfolio: {
-      title: 'أعمال مختارة',
-      subtitle: 'لمحة عن مشاريع نفخر بها. انقر على أي عنصر لعرضه.',
-      viewAll: 'عرض الكل →',
-      visit: 'عرض المشروع',
-    },
-    about: {
-      title: 'نحن ديجيتال ZN',
-      body: 'وُلد ديجيتال ZN في العصر الرقمي ليكون وكالة إبداعية وتسويقية رقمية متكاملة الخدمات. نتشارك مع العلامات التجارية الطموحة لصياغة استراتيجيات تخترق الضجيج وتقود الحوار.',
-      vision: 'رؤيتنا بسيطة: قيادة الخلاصة أينما تواجد عملاؤنا.',
-      pillars: ['التميز الإبداعي','نتائج مبنية على البيانات','الذكاء الثقافي','السرعة في السوق','شراكة شفافة','عائد استثمار قابل للقياس'],
-    },
-    contact: {
-      title: 'لنبنِ شيئاً عظيماً',
-      subtitle: 'هل أنت مستعد لقيادة الخلاصة؟ أخبرنا عن مشروعك.',
-      name: 'اسمك', email: 'بريدك الإلكتروني', msg: 'أخبرنا عن مشروعك...',
-      servicesLabel: 'الخدمات التي تهمك (اختر واحدة أو أكثر)',
-      servicesError: 'يرجى اختيار خدمة واحدة على الأقل.',
-      send: 'إرسال الرسالة',
-      sending: 'جارٍ الإرسال...',
-      successTitle: 'تم الإرسال!', successMsg: 'سنتواصل معك خلال 24 ساعة.',
-      errInvalid: 'يرجى ملء جميع الحقول بمعلومات صحيحة.',
-      errEmail: 'يرجى إدخال بريد إلكتروني صحيح.',
-      errLength: 'يجب أن تكون الرسالة بين 10 و 2000 حرف.',
-      errRate: 'لقد أرسلت رسالة للتو. يرجى الانتظار قبل إرسال أخرى.',
-    },
-    footer: { tagline: '"نحن نقود الخلاصة"', rights: 'جميع الحقوق محفوظة.' },
-  },
-};
+    nav_home:      'الرئيسية',
+    nav_services:  'الخدمات',
+    nav_portfolio: 'أعمالنا',
+    nav_about:     'من نحن',
+    nav_cta:       'تواصل معنا',
+    scroll_hint:   'مرر للاستكشاف',
+    hero_badge:    'وكالة تسويق رقمي',
+    hero_t1:       'نحن نقود',
+    hero_t2:       'المحتوى الرقمي',
+    hero_sub:      'وكالة إبداعية رقمية مقرها المغرب. نصمم ونطور ونصور للعلامات التجارية التي تريد أن تتميز.',
+    hero_cta1:     'ابدأ رحلتك',
+    hero_cta2:     'شاهد أعمالنا',
+    reel_label:    'شريط الأعمال 2025',
+    srv_label:     '02 — الخدمات',
+    srv_title:     'ماذا نفعل',
+    srv_sub:       'حلول رقمية متكاملة للعلامات التجارية الطموحة.',
+    srv1_name:     'تصميم وسائل التواصل',
+    srv1_desc:     'منشورات واستوريات وأغلفة وقوالب جذابة مصممة لصوت علامتك التجارية عبر جميع المنصات.',
+    srv2_name:     'التصميم الجرافيكي',
+    srv2_desc:     'طباعة حسب الطلب، كتب، لافتات، كتيبات، عروض باور بوينت متحركة والمزيد.',
+    srv3_name:     'هوية العلامة التجارية',
+    srv3_desc:     'أنظمة علامة تجارية كاملة — المفهوم، الشعار، لوحة الألوان، الخطوط، والدليل التجاري.',
+    srv4_name:     'صفحات الهبوط',
+    srv4_desc:     'صفحات هبوط عالية التحويل بـ HTML وCSS وJavaScript — نظيفة وسريعة ومتجاوبة.',
+    srv5_name:     'مونتاج الفيديو',
+    srv5_desc:     'مونتاج احترافي للريلز والإعلانات والمحتوى الترويجي الذي يأسر جمهورك.',
+    srv6_name:     'التصوير والفيديو',
+    srv6_desc:     'جلسات تصوير فوتوغرافي وفيديو لإنتاج محتوى بصري مذهل لعلامتك التجارية.',
+    srv_link:      'اعرف المزيد →',
+    srv1_dialog_title: 'تصميم وسائل التواصل — الاستراتيجية والمحتوى',
+    srv1_dialog_desc: 'نصنع أنظمة محتوى اجتماعي لافتة للنظر ومتكيفة مع هوية علامتك، من أفكار الحملات إلى المنشورات والقصص والقوالب والتوجيه الإبداعي.',
+    srv2_dialog_title: 'التصميم الجرافيكي — أنظمة بصرية',
+    srv2_dialog_desc: 'من التصميم التحريري والمطبوعات إلى العروض ومواد الحملات، نبني أنظمة بصرية متناسقة تجعل كل نقطة تواصل واضحة ولا تُنسى.',
+    srv3_dialog_title: 'هوية العلامة — بناء النظام',
+    srv3_dialog_desc: 'نحوّل تموضع علامتك إلى هوية بصرية متكاملة تشمل المفهوم واتجاه الشعار والألوان والخطوط والنماذج الإرشادية العملية.',
+    srv4_dialog_title: 'صفحات الهبوط — مصممة للتحويل',
+    srv4_dialog_desc: 'نصمم ونطور صفحات هبوط مركزة بهرمية واضحة وتخطيطات متجاوبة ودعوات فعل قوية وأداء سريع على الواجهة الأمامية.',
+    srv5_dialog_title: 'مونتاج الفيديو — القصة في حركة',
+    srv5_dialog_desc: 'نحوّل اللقطات الخام إلى ريلز وإعلانات ومحتوى ترويجي متقن من خلال الإيقاع والانتقالات والصوت واللمسات النهائية المناسبة لكل منصة.',
+    srv6_dialog_title: 'التصوير والفيديو — التقاط هوية العلامة',
+    srv6_dialog_desc: 'نخطط وننفذ جلسات تصوير فوتوغرافي وفيديو تمنح علامتك مكتبة بصرية قوية للحملات ومحتوى التواصل والمنتجات وسرد القصص.',
 
-/* ── Portfolio data: edit here to add/remove items ── */
-const projects = [
-  {
-    title: 'Graphic Design Showcase',
-    cat: 'Branding',
-    tags: ['Illustrator', 'InDesign', 'Photoshop'],
-    image: 'assets/portfolio-brand.png',
-    link: 'https://www.behance.net/',
-  },
-  {
-    title: 'Editing & Videography',
-    cat: 'Video',
-    tags: ['Premiere Pro', 'Sony FX3', 'After Effects'],
-    image: 'assets/intro logo .gif',
-    link: 'https://www.youtube.com/',
-  },
-  {
-    title: 'Web Development — Full Stack',
-    cat: 'Web',
-    tags: ['Website', 'Backend', 'Hosting'],
-    image: 'assets/portfolio-landing.png',
-    link: 'https://digital-zn.com/',
-  },
+    pf_label:      '03 — أعمالنا',
+    pf_title:      'أعمال مختارة',
+    pf_sub:        'لمحة عن الحملات التي حركت الأسواق. انقر لمشاهدة أي عمل.',
+    pf1_cat:       'هوية بصرية',
+    pf1_name:      'معرض التصميم الجرافيكي',
+    pf2_cat:       'فيديو',
+    pf2_name:      'مونتاج وتصوير',
+    pf3_cat:       'ويب',
+    pf3_name:      'تطوير الويب — فول ستاك',
+    pf_view:       'مشاهدة المشروع',
+    pf_all:        'جميع الأعمال →',
+    ab_label:      '04 — من نحن',
+    ab_title:      'نحن Digital ZN',
+    ab_body:       'وُلدت Digital ZN في العصر الرقمي لتكون وكالة إبداعية وتسويقية متكاملة. نتشارك مع العلامات التجارية الطموحة لصياغة استراتيجيات تخترق الضجيج وتقود الحوار. فريقنا من الاستراتيجيين والمبدعين والتقنيين يعملون بتناغم — لتحويل الرؤى إلى لحظات فيروسية.',
+    ab_quote:      '"رؤيتنا بسيطة: أن نقود الفيد أينما كان عملاؤنا حاضرين."',
+    p1: 'التميز الإبداعي',
+    p2: 'نتائج مدفوعة بالبيانات',
+    p3: 'الذكاء الثقافي',
+    p4: 'السرعة في الوصول للسوق',
+    p5: 'شراكة شفافة',
+    p6: 'عائد استثمار قابل للقياس',
+    ct_label:      '05 — تواصل',
+    ct_title:      'لنبني شيئاً عظيماً',
+    ct_sub:        'مستعد لقيادة الفيد؟ حدثنا عن مشروعك.',
+    ct_wa:         'تحدث عبر واتساب',
+    form_name:     'اسمك',
+    form_email:    'بريدك الإلكتروني',
+    form_phone:    '+212-XXX-XXXXXX',
+    form_services: 'الخدمات التي تهمك',
+    form_msg:      'أخبرنا عن مشروعك...',
+    form_send:     'إرسال الرسالة',
+    success_title: 'تم إرسال رسالتك!',
+    success_msg:   'سنرد عليك خلال 24 ساعة.',
+    footer_tagline: '"نحن نقود المحتوى الرقمي"',
+    footer_copy:   'جميع الحقوق محفوظة.',
+    err_name:      'الرجاء إدخال اسمك.',
+    err_email:     'الرجاء إدخال بريد إلكتروني صحيح.',
+    err_msg:       'الرجاء وصف مشروعك (10 أحرف على الأقل).',
+    card1_title: 'هوية الذكاء الاصطناعي',
+    card1_cat:   'هوية تجارية',
+    card2_title: 'حملة ماركة البيرة',
+    card2_cat:   'وسائل التواصل',
+    card3_title: 'تطبيق الزراعة',
+    card3_cat:   'تصميم الويب',
+    card4_title: 'منصة فينتيك',
+    card4_cat:   'صفحة هبوط',
+    card5_title: 'إطلاق العقارات',
+    card5_cat:   'إنتاج الفيديو',
+  }
+};
+/* ============================================
+   background animation
+============================================ */
+/* ============================================
+   CAROUSEL DATA
+============================================ */
+const CARDS = [
+  { img: 'assets/pr2.jpg',     titleKey: 'card1_title', catKey: 'card1_cat' },
+  { img: 'assets/b152a9192944243.65e6201706c6f.png',   titleKey: 'card2_title', catKey: 'card2_cat' },
+  { img: 'assets/cf0879199625531.66e5ba2a7c4f2.jpg',     titleKey: 'card3_title', catKey: 'card3_cat' },
+  { img: 'assets/yyt.png',  titleKey: 'card4_title', catKey: 'card4_cat' },
+  { img: 'assets/prj2.gif',  titleKey: 'card5_title', catKey: 'card5_cat' },
+  { img: 'assets/fffs.jpg',   titleKey: 'card2_title', catKey: 'card6_cat' },
+  { img: 'assets/oopsd.jpg',   titleKey: 'card2_title', catKey: 'card7_cat' },
+    { img: 'assets/yyt.png',  titleKey: 'card4_title', catKey: 'card8_cat' },
+  { img: 'assets/prj2.gif',  titleKey: 'card5_title', catKey: 'card9_cat' },
+  { img: 'assets/fffs.jpg',   titleKey: 'card2_title', catKey: 'card10_cat' },
+  { img: 'assets/oopsd.jpg',   titleKey: 'card2_title', catKey: 'card11_cat' },
 ];
 
-/* ── State ── */
-let currentLang = 'en';
-let videoPlaying = true;
-let statsAnimated = false;
-const selectedServices = new Set();
+/* ============================================
+   STATE
+============================================ */
+let currentLang   = localStorage.getItem('dzn_lang')  || 'en';
+let currentTheme  = localStorage.getItem('dzn_theme') || 'dark';
+let carouselAngle = 0;
+const BASE_CAROUSEL_SPEED = -0.004;
+let carouselVelocity = BASE_CAROUSEL_SPEED;
+let carouselFrame = null;
+let lastCarouselTime = 0;
+let reelPlaying = true;
+let isDragging  = false;
+let dragStartX  = 0;
+let dragLastX   = 0;
+let dragLastTime = 0;
+let dragVelocity = 0;
 
-/* ── Init ── */
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('year').textContent = new Date().getFullYear();
-  buildMarquee();
-  buildServices();
-  buildStats();
-  buildWork();
-  buildPillars();
-  buildServiceChips();
-  initScrollReveal();
-  initNavbarScroll();
-  initHeroTitle();
-  initCursor();
-  initHamburger();
-  applyLang('en');
-});
+/* ============================================
+   HELPERS
+============================================ */
+const $ = id => document.getElementById(id);
+const t = key => (LANG[currentLang] && LANG[currentLang][key]) ? LANG[currentLang][key] : (LANG.en[key] || key);
 
-/* ── Language ── */
-function setLang(lang) {
-  if (!i18n[lang]) return;
+function applyLang(lang) {
   currentLang = lang;
+  localStorage.setItem('dzn_lang', lang);
+
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir  = lang === 'ar' ? 'rtl' : 'ltr';
+
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t(key)) el.textContent = t(key);
+  });
+
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (t(key)) el.placeholder = t(key);
+  });
+
+  document.querySelectorAll('[data-i18n-chip]').forEach(el => {
+    const key = el.getAttribute('data-i18n-chip');
+    if (t(key)) el.textContent = t(key);
+  });
+
+
+  updateCarouselLang();
+
+
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
-  const isRTL = lang === 'ar';
-  document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-  document.documentElement.lang = lang;
-  applyLang(lang);
-  rebuildDynamic(lang);
 }
 
-function applyLang(lang) {
-  const t = i18n[lang];
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    const val = getNestedKey(t, key);
-    if (val !== undefined) el.textContent = val;
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.dataset.i18nPlaceholder;
-    const val = getNestedKey(t, key);
-    if (val !== undefined) el.placeholder = val;
-  });
+function applyTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem('dzn_theme', theme);
+  document.documentElement.setAttribute('data-theme', theme);
 }
-
-function getNestedKey(obj, path) {
-  return path.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj);
-}
-
-function rebuildDynamic(lang) {
-  buildServices(lang);
-  buildStats(lang);
-  buildWork(lang);
-  buildPillars(lang);
-  buildServiceChips(lang);
-  updateFooterTagline(lang);
-}
-
-/* ── Security helpers ── */
-function escapeHTML(str) {
-  return String(str ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
-
-function sanitizeText(str, max = 2000) {
-  return String(str ?? '')
-    .replace(/<[^>]*>/g, '')
-    .replace(/[\u0000-\u001F\u007F]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, max);
-}
-
-function isValidEmail(email) {
-  if (typeof email !== 'string' || email.length > 254) return false;
-  return /^[^\s@<>"']+@[^\s@<>"']+\.[^\s@<>"']{2,}$/.test(email);
-}
-
-function isSafeUrl(url) {
-  try {
-    const u = new URL(url, window.location.origin);
-    return u.protocol === 'http:' || u.protocol === 'https:' || u.protocol === 'mailto:';
-  } catch (_) {
-    return false;
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('mainNav');
+  
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
   }
+});
+/* ============================================
+   INTRO OVERLAY
+============================================ */
+function initIntro() {
+  const overlay = $('intro-overlay');
+  if (!overlay) return;
+
+  setTimeout(() => overlay.classList.add('hidden'), 2600);
 }
 
-/* ── Build Marquee ── */
-function buildMarquee() {
-  const items = ['Social Media','Content Creation','Logo Design','Digital Marketing','Video Production','Landing Pages','Video Editing','Web Design','Photography','Motion Graphics','Graphic Design','Presentations'];
-  const doubled = [...items, ...items];
-  const track = document.getElementById('marquee-track');
-  if (!track) return;
-  track.innerHTML = doubled.map(item =>
-    `<div class="marquee-item"><span>${escapeHTML(item)}</span><div class="marquee-dot"></div></div>`
-  ).join('');
-}
-
-/* ── Build Services ── */
-function buildServices(lang = 'en') {
-  const t = i18n[lang];
-  const grid = document.getElementById('services-grid');
-  if (!grid) return;
-  grid.innerHTML = t.services.items.map((s, i) =>
-    `<div class="service-card reveal reveal-delay-${Math.min(i+1,5)}">
-      <div class="card-top">
-        <div class="card-icon" >${s.icon}</div>
-        <div class="card-num">${escapeHTML(s.num)}</div>
-      </div>
-      <div class="card-title">${escapeHTML(s.title)}</div>
-      <div class="card-desc">${escapeHTML(s.desc)}</div>
-      <div class="card-link">Learn more <span>→</span></div>
-    </div>`
-  ).join('');
-  initScrollReveal();
-}
-
-/* ── Build Stats ── */
-function buildStats(lang = 'en') {
-  const t = i18n[lang];
-  const grid = document.getElementById('stats-grid');
-  if (!grid) return;
-  statsAnimated = false;
-  grid.innerHTML = t.stats.items.map((s, i) =>
-    `<div class="stat-item reveal reveal-delay-${i+1}">
-      <div class="stat-value" data-target="${s.value}" data-suffix="${escapeHTML(s.suffix)}">0${escapeHTML(s.suffix)}</div>
-      <div class="stat-label">${escapeHTML(s.label)}</div>
-    </div>`
-  ).join('');
-  initScrollReveal();
-  observeStats();
-}
-
-function observeStats() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !statsAnimated) {
-        statsAnimated = true;
-        animateCounters();
-        observer.disconnect();
-      }
-    });
-  }, { threshold: 0.3 });
-  const grid = document.getElementById('stats-grid');
-  if (grid) observer.observe(grid);
-}
-
-function animateCounters() {
-  document.querySelectorAll('.stat-value[data-target]').forEach(el => {
-    const target = parseInt(el.dataset.target, 10);
-    const suffix = el.dataset.suffix || '';
-    const duration = 2000;
-    const step = 16;
-    let current = 0;
-    const increment = target / (duration / step);
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) { current = target; clearInterval(timer); }
-      el.textContent = Math.floor(current) + suffix;
-    }, step);
+/* ============================================
+   CURSOR GLOW
+============================================ */
+function initCursor() {
+  const glow = $('cursor-glow');
+  if (!glow || window.matchMedia('(hover: none)').matches) {
+    if (glow) glow.style.display = 'none';
+    return;
+  }
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top  = e.clientY + 'px';
   });
 }
 
-/* ── Build Portfolio ── */
-function buildWork(lang = 'en') {
-  const t = i18n[lang];
-  const grid = document.getElementById('work-grid');
-  if (!grid) return;
-  grid.innerHTML = projects.map((p, i) => {
-    const safeImage = encodeURI(p.image);
-    const safeLink = isSafeUrl(p.link) ? p.link : '#';
-    return `<a class="work-card reveal reveal-delay-${Math.min(i+1,4)}" href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(p.title)}">
-      <div class="work-bg" style="background-image:url('${safeImage}')"></div>
-      <div class="work-overlay"></div>
-      <div class="work-hover-icon"><div class="work-icon-circle">↗</div></div>
-      <div class="work-content">
-        <div class="work-tags">${p.tags.map(tag => `<span class="work-tag">${escapeHTML(tag)}</span>`).join('')}</div>
-        <div class="work-cat">${escapeHTML(p.cat)}</div>
-        <div class="work-title">${escapeHTML(p.title)}</div>
-        <div class="work-visit">${escapeHTML(t.portfolio.visit)} →</div>
-      </div>
-    </a>`;
-  }).join('');
-  document.querySelectorAll('[data-i18n="portfolio.viewAll"]').forEach(el => {
-    el.textContent = t.portfolio.viewAll;
+/* ============================================
+   NAVIGATION
+============================================ */
+function initNav() {
+  const nav    = document.querySelector('.nav');
+  const burger = $('hamburger');
+  const menu   = $('mobileMenu');
+
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+    updateActiveLink();
+  }, { passive: true });
+
+
+  burger && burger.addEventListener('click', () => {
+    const open = burger.classList.toggle('open');
+    menu.classList.toggle('open', open);
   });
-  initScrollReveal();
-}
 
-/* ── Build Pillars ── */
-function buildPillars(lang = 'en') {
-  const t = i18n[lang];
-  const list = document.getElementById('pillars-list');
-  if (!list) return;
-  list.innerHTML = t.about.pillars.map(p =>
-    `<div class="pillar"><div class="pillar-check">✓</div><span>${escapeHTML(p)}</span></div>`
-  ).join('');
-}
-
-/* ── Build Service Chips (multi-select) ── */
-function buildServiceChips(lang = 'en') {
-  const t = i18n[lang];
-  const wrap = document.getElementById('services-chips');
-  if (!wrap) return;
-  wrap.innerHTML = t.services.items.map(s => {
-    const isActive = selectedServices.has(s.id);
-    return `<button type="button" class="service-chip${isActive ? ' active' : ''}" data-service-id="${escapeHTML(s.id)}" aria-pressed="${isActive}">
-      <span class="chip-check" aria-hidden="true">✓</span>
-      <span>${escapeHTML(s.title)}</span>
-    </button>`;
-  }).join('');
-
-  wrap.querySelectorAll('.service-chip').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.serviceId;
-      if (!id) return;
-      if (selectedServices.has(id)) {
-        selectedServices.delete(id);
-        btn.classList.remove('active');
-        btn.setAttribute('aria-pressed', 'false');
-      } else {
-        selectedServices.add(id);
-        btn.classList.add('active');
-        btn.setAttribute('aria-pressed', 'true');
-      }
-      const err = document.getElementById('services-error');
-      if (err && selectedServices.size > 0) err.hidden = true;
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      menu.classList.remove('open');
     });
   });
 }
 
-function updateFooterTagline(lang) {
-  const t = i18n[lang];
-  document.querySelectorAll('[data-i18n="footer.tagline"]').forEach(el => {
-    el.textContent = t.footer.tagline;
+function updateActiveLink() {
+  const sections = ['home', 'hero', 'services', 'portfolio', 'about', 'contact'];
+  const scrollY  = window.scrollY + 120;
+  let current    = 'home';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollY) current = id;
   });
-  document.querySelectorAll('[data-i18n="footer.rights"]').forEach(el => {
-    el.textContent = t.footer.rights;
+
+  const navMap = { hero: 'home', home: 'home' };
+  const target = navMap[current] || current;
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href').replace('#', '');
+    link.classList.toggle('active', href === target);
   });
 }
 
-/* ── Scroll Reveal ── */
+/* ============================================
+   3D CAROUSEL
+============================================ */
+function buildCarousel() {
+  const scene = $('carouselScene');
+  if (!scene) return;
+
+  CARDS.forEach((card, i) => {
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'card-wrapper';
+    wrapper.dataset.index = i;
+
+
+    const inner = document.createElement('div');
+    inner.className = 'card-inner';
+    inner.innerHTML = `
+      <img src="${card.img}" alt="${t(card.titleKey)}" loading="${i === 0 ? 'eager' : 'lazy'}" />
+      <div class="card-gloss"></div>
+      <div class="card-ring"></div>
+    `;
+    wrapper.appendChild(inner);
+    scene.appendChild(wrapper);
+  });
+
+  positionCircularCards();
+  attachCarouselEvents();
+  startCircularAutoplay();
+}
+
+function getCarouselRadius() {
+  const width = window.innerWidth;
+  if (width < 768) return Math.min(width * 1.152, 464);
+  if (width < 900) return 390;
+  return 850;
+}
+
+function normalizeAngle(angle) {
+  return ((angle + 180) % 360 + 360) % 360 - 180;
+}
+
+const IS_TOUCH_DEVICE = window.matchMedia('(pointer: coarse)').matches
+                      || window.innerWidth < 768;
+
+function positionCircularCards() {
+  const wrappers = document.querySelectorAll('.card-wrapper');
+  const total = CARDS.length;
+  const step = 360 / total;
+  const radius = getCarouselRadius();
+  let frontIndex = 0;
+  let closest = Infinity;
+
+  wrappers.forEach((wrapper, i) => {
+    const frontDistance = Math.abs(normalizeAngle(i * step + carouselAngle));
+    if (frontDistance < closest) {
+      closest = frontDistance;
+      frontIndex = i;
+    }
+  });
+
+  wrappers.forEach((wrapper, i) => {
+    const angle = i * step + carouselAngle;
+    const normalized = normalizeAngle(angle);
+    const depth = Math.cos(angle * Math.PI / 180);
+    const opacity = 0.28 + Math.max(depth, 0) * 0.72;
+    const scale = 0.78 + Math.max(depth, 0) * 0.22;
+
+    wrapper.classList.toggle('is-active', i === frontIndex);
+    wrapper.style.zIndex = String(Math.round((depth + 1) * 100));
+    wrapper.style.opacity = opacity.toFixed(3);
+    wrapper.style.transform =
+      `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px) scale(${scale})`;
+    wrapper.style.visibility = (IS_TOUCH_DEVICE && Math.abs(normalized) > 100)
+      ? 'hidden' : 'visible';
+  });
+}
+
+function startCircularAutoplay() {
+  cancelAnimationFrame(carouselFrame);
+  lastCarouselTime = performance.now();
+
+  const tick = now => {
+    const delta = Math.min(now - lastCarouselTime, 48);
+    lastCarouselTime = now;
+
+    if (!isDragging) {
+      carouselAngle += carouselVelocity * delta;
+      carouselVelocity += (BASE_CAROUSEL_SPEED - carouselVelocity) * Math.min(delta / 900, 1);
+    }
+
+    positionCircularCards();
+    carouselFrame = requestAnimationFrame(tick);
+  };
+
+  carouselFrame = requestAnimationFrame(tick);
+}
+
+function attachCarouselEvents() {
+  const wrapper = $('carouselWrapper');
+  if (!wrapper) return;
+
+  wrapper.addEventListener('pointerdown', onDragStart);
+  window.addEventListener('pointermove', onDragMove);
+  window.addEventListener('pointerup', onDragEnd);
+  window.addEventListener('pointercancel', onDragEnd);
+  window.addEventListener('resize', positionCircularCards);
+
+  document.querySelectorAll('.card-wrapper').forEach(wrapper => {
+    wrapper.addEventListener('click', () => {
+      if (Math.abs(dragStartX - dragLastX) > 10) return;
+      const idx = parseInt(wrapper.dataset.index, 10);
+      const step = 360 / CARDS.length;
+      const current = normalizeAngle(idx * step + carouselAngle);
+      carouselVelocity = current > 0 ? -0.035 : 0.035;
+    });
+  });
+}
+
+function onDragStart(e) {
+  if (e.button !== undefined && e.button !== 0) return;
+  isDragging = true;
+  dragStartX = e.clientX;
+  dragLastX = e.clientX;
+  dragLastTime = performance.now();
+  dragVelocity = 0;
+  const wrapper = $('carouselWrapper');
+  wrapper && wrapper.classList.add('is-dragging');
+}
+
+function onDragMove(e) {
+  if (!isDragging) return;
+  const now = performance.now();
+  const dx = e.clientX - dragLastX;
+  const dt = Math.max(now - dragLastTime, 1);
+  carouselAngle += dx * 0.22;
+  dragVelocity = (dx / dt) * 0.22;
+  dragLastX = e.clientX;
+  dragLastTime = now;
+  positionCircularCards();
+}
+
+function onDragEnd() {
+  if (!isDragging) return;
+  isDragging = false;
+  dragStartX = dragLastX;
+  carouselVelocity = Math.max(-0.08, Math.min(0.08, dragVelocity || BASE_CAROUSEL_SPEED));
+  const wrapper = $('carouselWrapper');
+  wrapper && wrapper.classList.remove('is-dragging');
+}
+
+function updateCarouselLang() {
+  document.querySelectorAll('.card-wrapper').forEach((wrapper, i) => {
+    const img = wrapper.querySelector('img');
+    if (img && CARDS[i]) img.alt = t(CARDS[i].titleKey);
+  });
+}
+
+/* ============================================
+   REEL PLAYER
+============================================ */
+function initReel() {
+  const video     = document.querySelector('.reel-video');
+  const btn       = $('reelPlayBtn');
+  const playIcon  = $('reelPlayIcon');
+  const pauseIcon = $('reelPauseIcon');
+  const heroReel  = document.querySelector('.hero-reel');
+  if (!video || !btn) return;
+
+  btn.addEventListener('click', () => {
+    if (video.paused) { video.play(); reelPlaying = true; }
+    else              { video.pause(); reelPlaying = false; }
+    playIcon.style.display  = video.paused ? 'block' : 'none';
+    pauseIcon.style.display = video.paused ? 'none'  : 'block';
+  });
+
+  heroReel && heroReel.addEventListener('click', e => {
+    if (e.target === btn || btn.contains(e.target)) return;
+    btn.click();
+  });
+}
+
+/* ============================================
+   THEME TOGGLE
+============================================ */
+function initTheme() {
+  applyTheme(currentTheme);
+  const toggle = $('themeToggle');
+  toggle && toggle.addEventListener('click', () => {
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+}
+
+/* ============================================
+   LANGUAGE SWITCHER
+============================================ */
+function initLang() {
+  applyLang(currentLang);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  });
+}
+
+/* ============================================
+   SCROLL REVEAL
+============================================ */
 function initScrollReveal() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+
+        const siblings = Array.from(entry.target.parentElement.querySelectorAll('.reveal-up'));
+        const idx = siblings.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), idx * 80);
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
 }
 
-/* ── Hero Title Animation ── */
-function initHeroTitle() {
-  const words = document.querySelectorAll('#hero-title .word span');
-  words.forEach((span, i) => {
-    span.style.transition = `transform 0.7s cubic-bezier(0.22,1,0.36,1) ${0.4 + i * 0.12}s, opacity 0.7s ${0.4 + i * 0.12}s`;
-    span.style.display = 'inline-block';
-    setTimeout(() => {
-      span.style.transform = 'translateY(0)';
-      span.style.opacity = '1';
-    }, 50);
+/* ============================================
+   CONTACT FORM
+============================================ */
+function initForm() {
+  const form      = $('contactForm');
+  const errorBox  = $('formError');
+  const submitBtn = $('submitBtn');
+  const submitLbl = $('submitLabel');
+  const success   = $('formSuccess');
+  if (!form) return;
+
+
+  document.querySelectorAll('#serviceChips .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('selected');
+    });
   });
-}
 
-/* ── Navbar Scroll ── */
-function initNavbarScroll() {
-  const nav = document.getElementById('navbar');
-  if (!nav) return;
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (errorBox) errorBox.textContent = '';
 
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      const target = link.getAttribute('href').substring(1);
-      const el = document.getElementById(target);
-      if (el) {
-        e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth' });
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.phone.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name) {
+      errorBox.textContent = t('err_name');
+      form.name.classList.add('invalid');
+      form.name.focus();
+      return;
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorBox.textContent = t('err_email');
+      form.email.classList.add('invalid');
+      form.email.focus();
+      return;
+    }
+
+    if (message.length < 10) {
+      errorBox.textContent = t('err_msg');
+      form.message.classList.add('invalid');
+      form.message.focus();
+      return;
+    }
+
+    const services = Array.from(
+      document.querySelectorAll('#serviceChips .chip.selected')
+    ).map(chip => chip.dataset.val);
+
+    if (services.length === 0) {
+      errorBox.textContent = 'Please select at least one service.';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitLbl.textContent = 'Sending...';
+
+
+    const payload = {
+      name,
+      email,
+      phone,
+      services,
+      message
+    };
+
+    try {
+      const response = await fetch(`${API.BASE_URL}${API.CONTACT}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message.');
       }
+
+      form.style.display = 'none';
+      success.style.display = 'flex';
+
+    } catch (error) {
+      console.error('Contact form error:', error);
+      errorBox.textContent = error.message || 'Unable to send your message.';
+    } finally {
+      submitBtn.disabled = false;
+      submitLbl.textContent = t('form_send');
+    }
+  });
+
+  form.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('focus', () => {
+      el.classList.remove('invalid');
+      if (errorBox) errorBox.textContent = '';
     });
   });
 }
 
-function smoothScroll(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
+/* ============================================
+   MARQUEE HOVER PAUSE
+============================================ */
+function initMarquee() {
+  const track = document.querySelector('.marquee-content');
+  if (!track) return;
+  const parent = track.parentElement;
+  parent.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+  parent.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
 }
+/* ============================================
+   FOOTER YEAR
+============================================ */
+function initFooter() {
+  const el = $('year');
+  if (el) el.textContent = new Date().getFullYear();
+}
+/* ============================================
+   SMOOTH SCROLL for anchor links
+============================================ */
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+/* ============================================
+   SERVICE MORPHING DIALOG
+============================================ */
 
-/* ── Hamburger ── */
-function initHamburger() {
-  const ham  = document.getElementById('hamburger');
-  const menu = document.getElementById('mobile-menu');
-  if (!ham || !menu) return;
-  ham.addEventListener('click', () => {
-    ham.classList.toggle('open');
-    menu.classList.toggle('open');
-    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+function initServiceMorph() {
+  const dialog = document.getElementById('serviceDialog');
+  const closeBtn = document.getElementById('serviceDialogClose');
+  const dialogImage = document.getElementById('dialogImage');
+  const dialogNumber = document.getElementById('dialogNumber');
+  const dialogTitle = document.getElementById('dialogTitle');
+  const dialogDescription = document.getElementById('dialogDescription');
+  const cards = document.querySelectorAll('.service-card');
+
+  if (!dialog || !closeBtn || !dialogImage || !dialogNumber ||
+      !dialogTitle || !dialogDescription || !cards.length) return;
+
+  let activeCard = null;
+  let closeTimer = null;
+
+
+  cards.forEach((card, index) => {
+    const expandBtn = card.querySelector('.service-expand');
+    if (!expandBtn) return;
+
+    const openService = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (closeTimer) clearTimeout(closeTimer);
+
+      activeCard = card;
+
+      const imageSrc = card.dataset.dialogImage ||
+        card.querySelector('.service-icon img')?.getAttribute('src');
+
+      if (imageSrc) {
+        dialogImage.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.alt = '';
+        dialogImage.appendChild(img);
+      }
+
+
+      const titleKey = card.dataset.dialogTitleKey;
+      const descKey = card.dataset.dialogDescKey;
+
+      dialogNumber.textContent = `${String(index + 1).padStart(2, '0')} — SERVICE`;
+      dialogTitle.textContent = titleKey ? t(titleKey) : '';
+      dialogDescription.textContent = descKey ? t(descKey) : '';
+
+      dialog.classList.add('open');
+      dialog.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('service-dialog-open');
+
+      requestAnimationFrame(() => closeBtn.focus());
+    };
+
+    card.addEventListener('click', openService);
+
+    expandBtn.addEventListener('click', openService);
+  });
+
+  function closeDialog() {
+    if (!dialog.classList.contains('open')) return;
+
+    dialog.classList.remove('open');
+    dialog.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('service-dialog-open');
+  }
+
+  closeBtn.addEventListener('click', closeDialog);
+
+  const backdrop = dialog.querySelector('.service-dialog-backdrop');
+  if (backdrop) backdrop.addEventListener('click', closeDialog);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dialog.classList.contains('open')) {
+      closeDialog();
+    }
   });
 }
 
-function closeMobileMenu() {
-  const ham = document.getElementById('hamburger');
-  const menu = document.getElementById('mobile-menu');
-  if (ham) ham.classList.remove('open');
-  if (menu) menu.classList.remove('open');
-  document.body.style.overflow = '';
-}
+/* ============================================
+   INIT
+============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  initIntro();
+  initCursor();
+  initNav();
+  buildCarousel();
+  initReel();
+  initTheme();
+  initLang();
+  initScrollReveal();
+  initForm();
+  initMarquee();
+  initFooter();
+  initSmoothScroll();
 
-/* ── Custom Cursor ── */
-function initCursor() {
-  if (window.innerWidth < 768) return;
-  const dot  = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  if (!dot || !ring) return;
+  initServiceMorph();
 
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
-
-  (function animateCursor() {
-    dot.style.left = mx + 'px';
-    dot.style.top  = my + 'px';
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(animateCursor);
-  })();
-
-  document.addEventListener('mouseover', e => {
-    if (e.target.closest('a, button, .service-card, .work-card')) {
-      ring.style.transform = 'translate(-50%,-50%) scale(1.6)';
-      ring.style.borderColor = 'rgba(247,112,21,0.8)';
-    }
-  });
-  document.addEventListener('mouseout', e => {
-    if (e.target.closest('a, button, .service-card, .work-card')) {
-      ring.style.transform = 'translate(-50%,-50%) scale(1)';
-      ring.style.borderColor = 'rgba(247,112,21,0.5)';
-    }
-  });
-}
-
-/* ── Contact Form (with validation, sanitization, rate limiting) ── */
-function showFormError(messageKey, fallback) {
-  const t = i18n[currentLang] || i18n.en;
-  const el = document.getElementById('form-error');
-  if (!el) return;
-  el.textContent = (t.contact && t.contact[messageKey]) || fallback || 'Error';
-  el.hidden = false;
-}
-function clearFormError() {
-  const el = document.getElementById('form-error');
-  if (el) { el.hidden = true; el.textContent = ''; }
-}
-
-async function handleFormSubmit(e) {
-  e.preventDefault();
-  clearFormError();
-
-  const form = e.target;
-  const t = i18n[currentLang] || i18n.en;
-
-  // Rate limit: 1 submission per 30 seconds, persisted in localStorage.
-  try {
-    const last = parseInt(localStorage.getItem('dz_last_submit') || '0', 10);
-    if (Date.now() - last < 30_000) {
-      showFormError('errRate');
-      return;
-    }
-  } catch (_) { /* localStorage unavailable: skip */ }
-
-  const rawName    = form.elements.name.value;
-  const rawEmail   = form.elements.email.value;
-  const rawPhone = form.elements.phone.value;
-  const rawMessage = form.elements.message.value;
-
-  const name    = sanitizeText(rawName, 80);
-  const email   = sanitizeText(rawEmail, 120);
-  const phone   = sanitizeText(rawPhone, 20);
-  const message = sanitizeText(rawMessage, 2000);
-  const services = Array.from(selectedServices);
-
-  if (!name || !email || !message || !phone) {
-    showFormError('errInvalid');
-    return;
-  }
-  if (!isValidEmail(email)) {
-    showFormError('errEmail');
-    return;
-  }
-  if (message.length < 10) {
-    showFormError('errLength');
-    return;
-  }
-  if (services.length === 0) {
-    const err = document.getElementById('services-error');
-    if (err) err.hidden = false;
-    return;
-  }
-
-  const submitBtn = document.getElementById('form-submit');
-  if (submitBtn) {
-    submitBtn.disabled = true;
-    const label = submitBtn.querySelector('span[data-i18n="contact.send"]');
-    if (label) label.textContent = t.contact.sending || 'Sending...';
-  }
-
-const payload = {
-    name,
-    email,
-    phone,
-    services,
-    message
-};
-
-fetch(`${API.BASE_URL}${API.CONTACT}`, {
-
-    method: "POST",
-
-    headers: {
-        "Content-Type": "application/json"
-    },
-
-    body: JSON.stringify(payload)
-
-})
-.then(async response => {
-
-    const data = await response.json();
-
-    if (!response.ok) {
-        throw new Error(data.message || "Failed to send message.");
-    }
-
-    localStorage.setItem("dz_last_submit", String(Date.now()));
-
-    form.style.display = "none";
-
-    const success = document.getElementById("form-success");
-
-    if (success) {
-        success.classList.add("show");
-    }
-
-})
-.catch(error => {
-
-    console.error(error);
-
-    showFormError(null, error.message);
-
-})
-.finally(() => {
-
-    if (submitBtn) {
-
-        submitBtn.disabled = false;
-
-        const label = submitBtn.querySelector(
-            'span[data-i18n="contact.send"]'
-        );
-
-        if (label) {
-            label.textContent = t.contact.send;
-        }
-
-    }
-
-});}
+  updateActiveLink();
+});

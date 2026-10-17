@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" data-theme="dark" dir="ltr">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-<meta
+  <meta
 http-equiv="Content-Security-Policy"
 content="
 default-src 'self';
@@ -25,270 +23,592 @@ frame-ancestors 'none';
 base-uri 'self';
 form-action 'self';
 ">
-  <title>Digital ZN</title>
-  <meta name="description" content="Digital ZN is a full-service digital marketing agency. We craft bold digital experiences that dominate markets and build legacies." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital ZN — Digital Marketing Agency</title>
+  <meta name="description"
+    content="Digital ZN is a full-service digital marketing agency. We craft bold digital experiences that dominate markets and build legacies." />
   <meta property="og:title" content="Digital ZN" />
   <meta property="og:description" content="Digital excellence meets creative power." />
-  <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
-  <meta property="og:image" content="logo.png" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <script src="main.js" defer></script>
 </head>
+
 <body>
 
-<!-- ═══════════════════ NAVBAR ═══════════════════ -->
-<nav id="navbar">
-  <a href="#hero" class="nav-logo" onclick="scrollTo('hero')">
-    <img src="assets/logo.png" alt="Digital ZN">
-    <div class="nav-logo-text">Digital<span>ZN</span></div>
-  </a>
-  <div class="nav-links" id="nav-links">
-    <a href="#hero"      data-i18n="nav.home">Home</a>
-    <a href="#services"  data-i18n="nav.services">Services</a>
-    <a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a>
-    <a href="#about"     data-i18n="nav.about">About</a>
-    <a href="#contact"   data-i18n="nav.contact" class="nav-cta">Contact</a>
-  </div>
-  <div class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#hero"      onclick="closeMobileMenu()" data-i18n="nav.home">Home</a>
-  <a href="#services"  onclick="closeMobileMenu()" data-i18n="nav.services">Services</a>
-  <a href="#portfolio" onclick="closeMobileMenu()" data-i18n="nav.portfolio">Portfolio</a>
-  <a href="#about"     onclick="closeMobileMenu()" data-i18n="nav.about">About</a>
-  <a href="#contact"   onclick="closeMobileMenu()" data-i18n="nav.contact">Contact</a>
-</div>
-
-<!-- ═══════════════════ HERO ═══════════════════ -->
-<section id="hero">
-  <video
-    id="hero-video"
-    class="hero-video"
-    src="assets/Sequence-01.mp4"
-    autoplay muted loop playsinline
-    type="video/mp4"
-    oncanplay="this.classList.add('loaded')"
-  ></video>
-  <div class="hero-overlay"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-glow"></div>
-
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span data-i18n="hero.badge">Digital Marketing Agency</span>
-    </div>
-    <h1 class="hero-title" id="hero-title">
-      <span class="word"><span data-i18n="hero.we">We</span></span>
-      <span class="word"><span data-i18n="hero.lead">Lead</span></span>
-      <span class="word"><span data-i18n="hero.the">The</span></span>
-      <span class="word"><span data-i18n="hero.feed">Feed</span></span>
-    </h1>
-    <p class="hero-tagline" data-i18n="hero.tagline">Digital excellence meets creative power.</p>
-    <p class="hero-sub" data-i18n="hero.sub">Creative digital agency based in Morocco. We design, build, and film for brands that want to stand out.</p>
-    <div class="hero-buttons">
-      <a href="#contact"   class="btn-primary"><span data-i18n="hero.cta">Start Your Journey</span></a>
-      <a href="#portfolio" class="btn-secondary" data-i18n="hero.see">See Our Portfolio</a>
+  <!-- INTRO OVERLAY -->
+  <div id="intro-overlay" aria-hidden="true">
+    <div class="intro-inner">
+      <img src="assets/intro-logo.gif" alt="Digital ZN" class="intro-gif" />
     </div>
   </div>
 
-  <div class="scroll-hint" onclick="smoothScroll('services')">
-    <span data-i18n="hero.scroll">Scroll to explore</span>
-    <div class="scroll-arrow"></div>
-  </div>
-</section>
+  <!-- CURSOR GLOW -->
+  <div id="cursor-glow" aria-hidden="true"></div>
 
-<!-- ═══════════════════ MARQUEE ═══════════════════ -->
-<div class="marquee-section" aria-hidden="true">
-  <div class="marquee-track" id="marquee-track"></div>
-</div>
-
-<!-- ═══════════════════ SERVICES ═══════════════════ -->
-<section id="services">
-  <div class="section-inner">
-    <div class="services-header reveal">
-      <div class="section-eyebrow">
-        <span class="eyebrow-num">02 / Services</span>
-        <div class="eyebrow-line"></div>
+  <!-- NAVIGATION -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="Digital ZN Home">
+        <img src="assets/logo.png" alt="Digital ZN" class="nav-logo-img" />
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" data-i18n="nav_home" class="nav-link active">Home</a>
+        <a href="#services" data-i18n="nav_services" class="nav-link">Services</a>
+        <a href="#portfolio" data-i18n="nav_portfolio" class="nav-link">Portfolio</a>
+        <a href="#about" data-i18n="nav_about" class="nav-link">About</a>
       </div>
-      <h2 class="section-title" data-i18n="services.title">What We Do</h2>
-      <p class="section-sub" data-i18n="services.subtitle">End-to-end digital solutions for brands that dare to lead.</p>
-    </div>
-    <div class="services-grid" id="services-grid"></div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ═══════════════════ STATS ═══════════════════ -->
-<section id="stats">
-  <div class="section-inner">
-    <div class="stats-header reveal">
-      <div class="stats-eyebrow">
-        <div class="eyebrow-line"></div>
-        <span class="eyebrow-num" data-i18n="stats.label">By The Numbers</span>
-        <div class="eyebrow-line"></div>
-      </div>
-      <h2 class="section-title" data-i18n="stats.title">The Numbers Speak</h2>
-    </div>
-    <div class="stats-grid" id="stats-grid"></div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ═══════════════════ PORTFOLIO ═══════════════════ -->
-<section id="portfolio">
-  <div class="section-inner">
-    <div class="work-header reveal">
-      <div>
-        <div class="section-eyebrow">
-          <span class="eyebrow-num">03 / Portfolio</span>
-          <div class="eyebrow-line"></div>
+      <div class="nav-controls">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ar">AR</button>
+          <button class="lang-btn" data-lang="fr">FR</button>
         </div>
-        <h2 class="section-title" data-i18n="portfolio.title">Selected Portfolio</h2>
-        <p class="section-sub" data-i18n="portfolio.subtitle">A glimpse of campaigns that made markets move.</p>
-      </div>
-      <a href="#contact" class="btn-outline" data-i18n="portfolio.viewAll">View All Portfolio →</a>
-    </div>
-    <div class="work-grid" id="work-grid"></div>
-  </div>
-</section>
+        <a href="#contact" class="nav-cta">
+    <span class="nav-cta-text" data-i18n="nav_cta">Contact</span>
 
-<div class="section-divider"></div>
-
-<!-- ═══════════════════ ABOUT ═══════════════════ -->
-<section id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <div class="section-eyebrow">
-          <span class="eyebrow-num">04 / About</span>
-          <div class="eyebrow-line"></div>
-        </div>
-        <h2 class="section-title" data-i18n="about.title">We Are Digital ZN</h2>
-        <p data-i18n="about.body">Born in the digital age, Digital ZN is a full-service creative and digital marketing agency. We partner with ambitious brands to craft strategies that cut through the noise and lead the conversation.</p>
-        <p class="about-vision" data-i18n="about.vision">"Our vision is simple: to lead the feed wherever our clients are present."</p>
-        <div class="pillars" id="pillars-list"></div>
-      </div>
-      <div class="about-visual reveal reveal-delay-2">
-        <img src="assets/4K GIF by Sehsucht Berlin.gif" alt="Digital ZN motion">
+    <svg
+        class="nav-cta-arrow"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        focusable="false"
+    >
+        <path d="M5 19L19 5" />
+        <path d="M8 5H19V16" />
+    </svg>
+</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ═══════════════════ CONTACT ═══════════════════ -->
-<section id="contact">
-  <div class="contact-glow"></div>
-  <div class="section-inner">
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <div class="section-eyebrow">
-          <span class="eyebrow-num">05 / Contact</span>
-          <div class="eyebrow-line"></div>
-        </div>
-        <h2 class="section-title" data-i18n="contact.title">Let's Build Something Great</h2>
-        <p data-i18n="contact.subtitle">Ready to lead the feed? Tell us about your project.</p>
-        <div class="contact-details">
-          <div class="contact-row">
-            <div class="contact-icon">✉️</div>
-            <div>
-              <div class="contact-row-label">Email</div>
-              <div class="contact-row-val">contact@digital-zn.com</div>
-            </div>
-          </div>
-          <div class="contact-row">
-            <div class="contact-icon">📞</div>
-            <div>
-              <div class="contact-row-label">Phone</div>
-              <div class="contact-row-val">+212 786 112 133</div>
-            </div>
-          </div>
-          <div class="contact-row">
-            <div class="contact-icon">📍</div>
-            <div>
-              <div class="contact-row-label">Location</div>
-              <div class="contact-row-val">Morocco · Casablanca</div>
-            </div>
-          </div>
-        </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-inner">
+        <a href="#home" data-i18n="nav_home" class="mobile-link">Home</a>
+        <a href="#services" data-i18n="nav_services" class="mobile-link">Services</a>
+        <a href="#portfolio" data-i18n="nav_portfolio" class="mobile-link">Portfolio</a>
+        <a href="#about" data-i18n="nav_about" class="mobile-link">About</a>
+        <a href="#contact" data-i18n="nav_cta" class="mobile-link mobile-link--cta">Contact</a>
       </div>
-      <div class="reveal reveal-delay-2">
-        <form class="contact-form" id="contact-form" onsubmit="handleFormSubmit(event)" novalidate autocomplete="on">
-          <div class="form-row">
-            <input class="form-field" type="text" name="name" data-i18n-placeholder="contact.name" placeholder="Your Name" required maxlength="80" autocomplete="name" />
-            <input class="form-field" type="email" name="email" data-i18n-placeholder="contact.email" placeholder="Your Email" required maxlength="120" autocomplete="email" />
-            <input class="form-field" type="tel" name="phone" data-i18n-placeholder="contact.phone" placeholder="+123-456-789" required maxlength="80" autocomplete="tel" />
+    </div>
+  </nav>
+
+  <!-- HERO — WE LEAD THE FEED -->
+
+  <section id="hero" class="section-hero">
+    <video class="hero-bg-video" autoplay loop muted playsinline preload="auto">
+      <source src="assets/velaris.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1 class="hero-title reveal-up">
+          <span data-i18n="hero_t1">WE LEAD</span>
+          <em data-i18n="hero_t2">THE FEED</em>
+        </h1>
+        <p class="hero-sub reveal-up" data-i18n="hero_sub">Creative digital agency based in Morocco.
+           We design, build, and film for brands that want to stand out.</p>
+        <div class="hero-cta reveal-up">
+          <a href="#contact" class="btn-primary" data-i18n="hero_cta1">Start Your Journey</a>
+          <a href="#portfolio" class="btn-ghost" data-i18n="hero_cta2">See Our Portfolio</a>
+        </div>
+        
+      </div>
+      <div class="right-side">
+
+    <div class="hero-device">
+
+        <div class="hero-device-glow"></div>
+
+        <img class="hero-device-video" src="assets/finaaaaal.gif">
+    </div>
+    </div>
+
+  </section>
+
+  <!-- SECTION 01 — SHOWCASE (3D Carousel) -->
+  <section id="home" class="section-showcase">
+    <div class="showcase-label reveal-up" data-i18n="showcase_label">
+      <span>01 — Some of our latest work</span>
+    </div>
+    <div class="carousel-wrapper" id="carouselWrapper">
+      <div class="carousel-scene" id="carouselScene"></div>
+    </div>
+    <div class="scroll-hint">
+      <span data-i18n="scroll_hint">Scroll</span>
+      <span class="scroll-line"><span class="scroll-dot"></span></span>
+    </div>
+  </section>
+  <!-- SECTION 02 — SERVICES -->
+  <section id="services" class="section-services section-cream">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label reveal-up" data-i18n="srv_label">02 — Services</span>
+        <h2 class="section-title reveal-up" data-i18n="srv_title">What We Do</h2>
+        <p class="section-sub reveal-up" data-i18n="srv_sub">End-to-end digital solutions for brands that dare to lead.
+        </p>
+      </div>
+      <div class="services-grid">
+
+        <div
+          class="service-card reveal-up"
+          data-service="1"
+          data-dialog-title-key="srv1_dialog_title"
+          data-dialog-desc-key="srv1_dialog_desc"
+          data-dialog-image="assets/service content/gif (1).gif"
+        >
+          <!-- MAIN CARD IMAGE -->
+          <div class="service-icon">
+            <img src="assets/icons/socual.png" alt="">
           </div>
 
-          <div class="services-select">
-            <div class="services-select-label" data-i18n="contact.servicesLabel">Services you're interested in</div>
-            <div class="services-chips" id="services-chips" role="group" aria-label="Services"></div>
-            <div class="services-error" id="services-error" data-i18n="contact.servicesError" hidden>Please select at least one service.</div>
-          </div>
+          <!-- MAIN CARD TITLE -->
+          <h3 class="service-name" data-i18n="srv1_name">Social Media Design</h3>
 
-          <textarea class="form-field" name="message" data-i18n-placeholder="contact.msg" placeholder="Tell us about your project..." required maxlength="2000"></textarea>
+          <p class="service-desc" data-i18n="srv1_desc">
+            Eye-catching posts, stories, covers, and templates tailored for your brand voice across all platforms.
+          </p>
 
-          <div class="form-error" id="form-error" hidden></div>
-
-          <button type="submit" class="btn-submit" id="form-submit">
-            <span data-i18n="contact.send">Send Message</span>
-            <span aria-hidden="true">✈</span>
+          <button class="service-expand" type="button" aria-label="Open service">
+            <span>+</span>
           </button>
-        </form>
-        <div class="form-success" id="form-success">
-          <div class="success-icon">✓</div>
-          <h3 data-i18n="contact.successTitle">Message Sent!</h3>
-          <p data-i18n="contact.successMsg">We'll get back to you within 24 hours.</p>
+        </div>
+
+        <!-- SERVICE 02 -->
+        <div
+          class="service-card reveal-up"
+          data-service="2"
+          data-dialog-title-key="srv2_dialog_title"
+          data-dialog-desc-key="srv2_dialog_desc"
+          data-dialog-image="assets/service content/gif.gif"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/graphic-01.png" alt="">
+          </div>
+          <h3 class="service-name" data-i18n="srv2_name">Graphic Design</h3>
+          <p class="service-desc" data-i18n="srv2_desc">
+            Print-on-demand, books, roll-ups, brochures, animated PowerPoint presentations, and more.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
+        </div>
+
+        <!-- SERVICE 03 -->
+        <div
+          class="service-card reveal-up"
+          data-service="3"
+          data-dialog-title-key="srv3_dialog_title"
+          data-dialog-desc-key="srv3_dialog_desc"
+          data-dialog-image="assets/service content/Brand Identity GIF by In-House Int'l Creative.gif"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/diam-01.png" alt="">
+          </div>
+          <h3 class="service-name" data-i18n="srv3_name">Brand Identity</h3>
+          <p class="service-desc" data-i18n="srv3_desc">
+            Full brand systems — concept, logo, color palette, typography, mockups, and brand guidelines.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
+        </div>
+
+        <!-- SERVICE 04 -->
+        <div
+          class="service-card reveal-up"
+          data-service="4"
+          data-dialog-title-key="srv4_dialog_title"
+          data-dialog-desc-key="srv4_dialog_desc"
+          data-dialog-image="assets/fffs.jpg"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/web-01.png" alt="">
+          </div>
+          <h3 class="service-name" data-i18n="srv4_name">Landing Pages</h3>
+          <p class="service-desc" data-i18n="srv4_desc">
+            High-converting landing pages built with HTML, CSS & JavaScript — clean, fast, and responsive.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
+        </div>
+
+        <!-- SERVICE 05 -->
+        <div
+          class="service-card reveal-up"
+          data-service="5"
+          data-dialog-title-key="srv5_dialog_title"
+          data-dialog-desc-key="srv5_dialog_desc"
+          data-dialog-image="assets/service content/giphy.gif"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/play-01.png" alt="">
+          </div>
+          <h3 class="service-name" data-i18n="srv5_name">Video Editing</h3>
+          <p class="service-desc" data-i18n="srv5_desc">
+            Professional video editing for reels, ads, and promotional content that captivates your audience.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
+        </div>
+
+        <!-- SERVICE 06 -->
+        <div
+          class="service-card reveal-up"
+          data-service="6"
+          data-dialog-title-key="srv6_dialog_title"
+          data-dialog-desc-key="srv6_dialog_desc"
+          data-dialog-image="assets/service content/GIF by Porta Dos Fundos.gif"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/Untitled-1-01.png" alt="">
+          </div>
+          <h3 class="service-name" data-i18n="srv6_name">Videography</h3>
+          <p class="service-desc" data-i18n="srv6_desc">
+            Photography and videography sessions to produce stunning visual content for your brand.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 03 — PORTFOLIO -->
+  <section id="portfolio" class="section-portfolio section-cream">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label reveal-up" data-i18n="pf_label">03 — Portfolio</span>
+        <h2 class="section-title reveal-up" data-i18n="pf_title">Selected Portfolio</h2>
+        <p class="section-sub reveal-up" data-i18n="pf_sub">A glimpse of campaigns that made markets move.</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-card reveal-up">
+          <div class="portfolio-img-wrap">
+            <img src="assets/portfolio-brand.png" alt="Graphic Design Showcase" loading="lazy" />
+            <div class="portfolio-overlay">
+              <span class="portfolio-view" data-i18n="pf_view">View project</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            </div>
+          </div>
+          <div class="portfolio-meta">
+            <div>
+              <span class="portfolio-cat" data-i18n="pf1_cat">Branding</span>
+              <h3 class="portfolio-name" data-i18n="pf1_name">Graphic Design Showcase</h3>
+            </div>
+            <div class="portfolio-tags"><span>Illustrator</span><span>InDesign</span><span>Photoshop</span></div>
+          </div>
+        </div>
+        <div class="portfolio-card reveal-up">
+          <div class="portfolio-img-wrap">
+            <img src="assets/portfolio-landing.png" alt="Editing & Videography" loading="lazy" />
+            <div class="portfolio-overlay">
+              <span class="portfolio-view" data-i18n="pf_view">View project</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            </div>
+          </div>
+          <div class="portfolio-meta">
+            <div>
+              <span class="portfolio-cat" data-i18n="pf2_cat">Video</span>
+              <h3 class="portfolio-name" data-i18n="pf2_name">Editing &amp; Videography</h3>
+            </div>
+            <div class="portfolio-tags"><span>Premiere Pro</span><span>Sony FX3</span><span>After Effects</span></div>
+          </div>
+        </div>
+        <div class="portfolio-card reveal-up">
+          <div class="portfolio-img-wrap">
+            <img src="assets/portfolio-web.png" alt="Web Development — Full Stack" loading="lazy" />
+            <div class="portfolio-overlay">
+              <span class="portfolio-view" data-i18n="pf_view">View project</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            </div>
+          </div>
+          <div class="portfolio-meta">
+            <div>
+              <span class="portfolio-cat" data-i18n="pf3_cat">Web</span>
+              <h3 class="portfolio-name" data-i18n="pf3_name">Web Development — Full Stack</h3>
+            </div>
+            <div class="portfolio-tags"><span>Website</span><span>Backend</span><span>Hosting</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-cta reveal-up">
+        <a href="#contact" class="btn-outline" data-i18n="pf_all">View All Portfolio →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 04 — ABOUT -->
+  <section id="about" class="section-abouts section-dark">
+    <div class="section-inner">
+      
+      <div class="about-grid">
+        <div class="about-left">
+          <span class="section-label section-label--light reveal-up" data-i18n="ab_label">04 — About</span>
+          <h2 class="section-title section-title--light reveal-up" data-i18n="ab_title">We Are Digital ZN</h2>
+          <p class="about-body reveal-up" data-i18n="ab_body">Born in the digital age, Digital ZN is a full-service
+            creative and digital marketing agency. We partner with ambitious brands to craft strategies that cut through
+            the noise and lead the conversation. Our team of strategists, creators, and technologists work in sync —
+            turning visions into viral moments.</p>
+          <blockquote class="about-quote reveal-up" data-i18n="ab_quote">"Our vision is simple: to lead the feed
+            wherever our clients are present."</blockquote>
+                              <div class="about-text-loop reveal-up" aria-label="What defines Digital ZN">
+            <span class="about-loop-item">Creative Excellence</span>
+            <span class="about-loop-item">Data-Driven Results</span>
+            <span class="about-loop-item">Cultural Intelligence</span>
+            <span class="about-loop-item">Speed to Market</span>
+            <span class="about-loop-item">Transparent Partnership</span>
+            <span class="about-loop-item">Measurable ROI</span>
+          </div>
+        </div>
+
+        <div class="about-right">
+          <div class="about-visual reveal-up">
+            <img src="assets/sehsucht.gif" alt="" aria-hidden="false" class="about-gif" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer id="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo">
-        <div class="nav-logo-box"><img src="assets/logo.png" alt="Digital ZN"></div>
-        <div class="nav-logo-text">Digital<span>ZN</span></div>
+  <!-- SECTION 05 — CONTACT -->
+  <section id="contact" class="section-contact section-cream">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <span class="section-label reveal-up" data-i18n="ct_label">05 — Contact</span>
+          <h2 class="section-title reveal-up" data-i18n="ct_title">Let's Build Something Great</h2>
+          <p class="contact-sub reveal-up" data-i18n="ct_sub">Ready to lead the feed? Tell us about your project.</p>
+          <div class="contact-details reveal-up">
+            <a href="mailto:contact@digital-zn.com" class="contact-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>contact@digital-zn.com</span>
+            </a>
+            <a href="tel:+212786112133" class="contact-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.5 16z" />
+              </svg>
+              <span>+212 786 112 133</span>
+            </a>
+            <div class="contact-detail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>Morocco · Casablanca</span>
+            </div>
+          </div>
+          <a href="https://wa.me/212786112133" target="_blank" rel="noopener" class="whatsapp-btn reveal-up">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+            </svg>
+            <span data-i18n="ct_wa">Chat on WhatsApp</span>
+          </a>
+        </div>
+        <div class="contact-form-wrap reveal-up">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" name="name" id="fieldName" autocomplete="name" required data-i18n-ph="form_name"
+                  placeholder="Your Name" />
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" id="fieldEmail" autocomplete="email" required data-i18n-ph="form_email"
+                  placeholder="Your Email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="tel" name="phone" id="fieldPhone" autocomplete="tel" data-i18n-ph="form_phone"
+                placeholder="+123-456-789" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="form_services">Services you're interested in</label>
+              <div class="service-chips" id="serviceChips">
+                <button type="button" class="chip" data-val="Social Media Design" data-i18n-chip="srv1_name">Social
+                  Media Design</button>
+                <button type="button" class="chip" data-val="Graphic Design" data-i18n-chip="srv2_name">Graphic
+                  Design</button>
+                <button type="button" class="chip" data-val="Brand Identity" data-i18n-chip="srv3_name">Brand
+                  Identity</button>
+                <button type="button" class="chip" data-val="Landing Pages" data-i18n-chip="srv4_name">Landing
+                  Pages</button>
+                <button type="button" class="chip" data-val="Video Editing" data-i18n-chip="srv5_name">Video
+                  Editing</button>
+                <button type="button" class="chip" data-val="Videography"
+                  data-i18n-chip="srv6_name">Videography</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <textarea name="message" id="fieldMessage" rows="5" required data-i18n-ph="form_msg"
+                placeholder="Tell us about your project..."></textarea>
+            </div>
+            <div class="form-error" id="formError" aria-live="polite"></div>
+            <button type="submit" class="btn-submit" id="submitBtn">
+              <span id="submitLabel" data-i18n="form_send">Send Message</span>
+              <img src="assets/icons/send-01-01.png" alt="" aria-hidden="true">
+            </button>
+          </form>
+          <div class="form-success" id="formSuccess" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <h3 data-i18n="success_title">Message Sent!</h3>
+            <p data-i18n="success_msg">We'll get back to you within 24 hours.</p>
+          </div>
+        </div>
       </div>
-      <div class="footer-tagline" data-i18n="footer.tagline">"We Lead The Feed"</div>
     </div>
-    <div class="footer-socials">
-      <a class="social-btn" href="https://www.instagram.com/digital_ma_zn/" target="_blank" rel="noopener noreferrer" title="Instagram">
-        <img src="https://img.icons8.com/?size=30&id=32323&format=png&color=000000" alt="Instagram">
-      </a>
-      <a class="social-btn" href="#" rel="noopener noreferrer" title="TIKTOK">
-        <img src="https://img.icons8.com/?size=30&id=118640&format=png&color=000000" alt="TIKTOK">
-      </a>
-      <a class="social-btn" href="#" rel="noopener noreferrer" title="Behance">
-        <img src="https://img.icons8.com/?size=30&id=13655&format=png&color=000000" alt="Behance">
-      </a>
-      <a class="social-btn" href="https://wa.me/212786112133" target="_blank" rel="noopener noreferrer" title="WhatsApp">
-        <img src="https://img.icons8.com/?size=30&id=16713&format=png&color=000000" alt="WhatsApp">
-      </a>
+  </section>
+
+<!-- FOOTER -->
+<footer class="footer section-dark">
+  <div class="footer-inner">
+
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="#home" class="footer-logo" aria-label="Digital ZN Home">
+          <img src="assets/foter-09.png" alt="Digital ZN" />
+        </a>
+
+        <p class="footer-description">
+          Digital ZN helps ambitious brands build bold digital experiences
+          through strategy, design, development, and visual content.
+        </p>
+
+        <p class="footer-copyright">
+          Digital ZN, Inc. © 2026
+        </p>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-column">
+        <h3>Services</h3>
+
+        <a href="#services">Web Design</a>
+        <a href="#services">Graphic Design</a>
+        <a href="#services">Brand Identity</a>
+        <a href="#services">Video Editing</a>
+        <a href="#services">Videography</a>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-column">
+        <h3>Company</h3>
+
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact">Support</a>
+      </div>
+
+      <!-- Social -->
+      <div class="footer-column">
+        <h3>Social</h3>
+
+        <a
+          href="https://www.instagram.com/digital_ma_zn/"
+          target="_blank"
+          rel="noopener"
+        >
+          Instagram
+        </a>
+
+        <a
+          href="https://wa.me/212786112133"
+          target="_blank"
+          rel="noopener"
+        >
+          WhatsApp
+        </a>
+
+        <a href="#" target="_blank" rel="noopener">
+          Behance
+        </a>
+
+        <a href="#" target="_blank" rel="noopener">
+          TikTok
+        </a>
+      </div>
+
     </div>
-    <div class="footer-copy">© <span id="year"></span> Digital ZN. <span data-i18n="footer.rights">All rights reserved.</span></div>
+
+    <!-- Large Digital ZN text -->
+    <div class="footer-word-wrapper" aria-hidden="true">
+      <div class="footer-word">DIGITALZN</div>
+    </div>
+
   </div>
 </footer>
+<!-- SERVICE MORPH DIALOG -->
+<div class="service-dialog" id="serviceDialog" aria-hidden="true">
 
-<!-- ═══════════════════ LANG SWITCHER ═══════════════════ -->
-<div id="lang-switcher" aria-label="Language switcher">
-  <button class="lang-btn active" onclick="setLang('en')" data-lang="en">EN</button>
-  <button class="lang-btn"        onclick="setLang('fr')" data-lang="fr">FR</button>
-  <button class="lang-btn"        onclick="setLang('ar')" data-lang="ar">AR</button>
+  <div class="service-dialog-backdrop"></div>
+
+<div class="service-dialog-container">
+
+  <button
+    class="service-dialog-close"
+    id="serviceDialogClose"
+    type="button"
+    aria-label="Close service"
+  >
+    ×
+  </button>
+
+  <!-- BIG IMAGE -->
+  <div class="service-dialog-image" id="dialogImage"></div>
+
+  <!-- CONTENT -->
+  <div class="service-dialog-content">
+
+    <span
+      class="service-dialog-number"
+      id="dialogNumber"
+    >
+      01 — SERVICE
+    </span>
+
+    <h2
+      class="service-dialog-title"
+      id="dialogTitle"
+    >
+      Social Media Design
+    </h2>
+
+    <p
+      class="service-dialog-description"
+      id="dialogDescription"
+    >
+      Eye-catching posts, stories, covers, and templates tailored
+      for your brand voice across all platforms.
+    </p>
+
+    <a href="#contact" class="service-dialog-link">
+      Let's work together →
+    </a>
+
+  </div>
+
 </div>
-
-<script src="main.js"></script>
+</div>
 </body>
+
 </html>
