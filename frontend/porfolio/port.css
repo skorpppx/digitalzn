@@ -1,0 +1,10 @@
+body,html{
+      font-family: 'Jost', sans-serif;
+    background-color: #080813;
+    text-align: center;
+  color:#fff;
+  padding-top:10em;
+}
+
+
+* { color:#fff; text-decoration: none;}

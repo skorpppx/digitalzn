@@ -96,37 +96,32 @@ form-action 'self';
   </nav>
 
   <!-- HERO — WE LEAD THE FEED -->
-
   <section id="hero" class="section-hero">
-    <video class="hero-bg-video" autoplay loop muted playsinline preload="auto">
-      <source src="assets/velaris.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay"></div>
-    
+    <div class="hero-overlay" aria-hidden="true"></div>
+
     <div class="hero-inner">
       <div class="hero-content">
+        <video
+          class="hero-cards"
+          src="assets/cards.webm"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+          tabindex="-1"
+        ></video>
         <h1 class="hero-title reveal-up">
-          <span data-i18n="hero_t1">WE LEAD</span>
-          <em data-i18n="hero_t2">THE FEED</em>
+          <span class="hero-title-line hero-title-line--first">
+            <span data-i18n="hero_t1">WE</span>
+            <span class="hero-title-accent" data-i18n="hero_tlead">LEAD</span>
+          </span>
+          <span class="hero-title-line hero-title-line--second" data-i18n="hero_t2">THE FEED</span>
         </h1>
-        <p class="hero-sub reveal-up" data-i18n="hero_sub">Creative digital agency based in Morocco.
-           We design, build, and film for brands that want to stand out.</p>
-        <div class="hero-cta reveal-up">
-          <a href="#contact" class="btn-primary" data-i18n="hero_cta1">Start Your Journey</a>
-          <a href="#portfolio" class="btn-ghost" data-i18n="hero_cta2">See Our Portfolio</a>
-        </div>
-        
+        <p class="hero-sub reveal-up" data-i18n="hero_sub">Digital zn is a creative and performance digital agency turning attention into acquisition. social creative, influence, media performance and data intelligence working as one team, for growth minded brands with the autonomy to move fast.</p>
       </div>
-      <div class="right-side">
-
-    <div class="hero-device">
-
-        <div class="hero-device-glow"></div>
-
-        <img class="hero-device-video" src="assets/finaaaaal.gif">
     </div>
-    </div>
-
   </section>
 
   <!-- SECTION 01 — SHOWCASE (3D Carousel) -->
@@ -221,7 +216,7 @@ form-action 'self';
           data-service="4"
           data-dialog-title-key="srv4_dialog_title"
           data-dialog-desc-key="srv4_dialog_desc"
-          data-dialog-image="assets/fffs.jpg"
+          data-dialog-image="assets/portfolio-web.jpg"
         >
           <!-- CHANGE MAIN CARD IMAGE HERE -->
           <div class="service-icon">
@@ -288,13 +283,15 @@ form-action 'self';
         <div class="portfolio-card reveal-up">
           <div class="portfolio-img-wrap">
             <img src="assets/portfolio-brand.png" alt="Graphic Design Showcase" loading="lazy" />
-            <div class="portfolio-overlay">
-              <span class="portfolio-view" data-i18n="pf_view">View project</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
+            <a href="./porfolio/port.html" class="portfolio-overlay">
+            <span class="portfolio-view" data-i18n="pf_view">View project</span>
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M7 7H17V17" />
               </svg>
-            </div>
+             </a>
           </div>
+
+          
           <div class="portfolio-meta">
             <div>
               <span class="portfolio-cat" data-i18n="pf1_cat">Branding</span>
@@ -303,16 +300,18 @@ form-action 'self';
             <div class="portfolio-tags"><span>Illustrator</span><span>InDesign</span><span>Photoshop</span></div>
           </div>
         </div>
-        <div class="portfolio-card reveal-up">
+        <div class="portfolio-card reveal-up" >
           <div class="portfolio-img-wrap">
             <img src="assets/portfolio-landing.png" alt="Editing & Videography" loading="lazy" />
-            <div class="portfolio-overlay">
-              <span class="portfolio-view" data-i18n="pf_view">View project</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
+            <a href="./porfolio/port.html" class="portfolio-overlay">
+            <span class="portfolio-view" data-i18n="pf_view">View project</span>
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M7 7H17V17" />
               </svg>
-            </div>
+             </a>
           </div>
+
+
           <div class="portfolio-meta">
             <div>
               <span class="portfolio-cat" data-i18n="pf2_cat">Video</span>
@@ -323,14 +322,16 @@ form-action 'self';
         </div>
         <div class="portfolio-card reveal-up">
           <div class="portfolio-img-wrap">
-            <img src="assets/portfolio-web.png" alt="Web Development — Full Stack" loading="lazy" />
-            <div class="portfolio-overlay">
-              <span class="portfolio-view" data-i18n="pf_view">View project</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 17L17 7M17 7H7M17 7v10" />
+            <img  src="assets/portfolio-web.jpg" alt="Web Development — Full Stack" loading="lazy" />
+            <a href="./porfolio/port.html" class="portfolio-overlay">
+            <span class="portfolio-view" data-i18n="pf_view">View project</span>
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M7 7H17V17" />
               </svg>
-            </div>
+             </a>
           </div>
+
+
           <div class="portfolio-meta">
             <div>
               <span class="portfolio-cat" data-i18n="pf3_cat">Web</span>
@@ -341,7 +342,7 @@ form-action 'self';
         </div>
       </div>
       <div class="portfolio-cta reveal-up">
-        <a href="#contact" class="btn-outline" data-i18n="pf_all">View All Portfolio →</a>
+        <a href="porfolio\port.html" class="btn-outline" data-i18n="pf_all">View All Portfolio →</a>
       </div>
     </div>
   </section>
@@ -361,12 +362,12 @@ form-action 'self';
           <blockquote class="about-quote reveal-up" data-i18n="ab_quote">"Our vision is simple: to lead the feed
             wherever our clients are present."</blockquote>
                               <div class="about-text-loop reveal-up" aria-label="What defines Digital ZN">
-            <span class="about-loop-item">Creative Excellence</span>
-            <span class="about-loop-item">Data-Driven Results</span>
-            <span class="about-loop-item">Cultural Intelligence</span>
-            <span class="about-loop-item">Speed to Market</span>
-            <span class="about-loop-item">Transparent Partnership</span>
-            <span class="about-loop-item">Measurable ROI</span>
+            <span class="about-loop-item" data-i18n="about_a1" >Creative Excellence</span>
+            <span class="about-loop-item" data-i18n="about_a2">Data-Driven Results</span>
+            <span class="about-loop-item" data-i18n="about_a3">Cultural Intelligence</span>
+            <span class="about-loop-item" data-i18n="about_a4">Speed to Market</span>
+            <span class="about-loop-item" data-i18n="about_a5">Transparent Partnership</span>
+            <span class="about-loop-item" data-i18n="about_a6">Measurable ROI</span>
           </div>
         </div>
 
@@ -488,7 +489,7 @@ form-action 'self';
           <img src="assets/foter-09.png" alt="Digital ZN" />
         </a>
 
-        <p class="footer-description">
+        <p class="footer-description" data-i18n-chip="desp">
           Digital ZN helps ambitious brands build bold digital experiences
           through strategy, design, development, and visual content.
         </p>
@@ -500,28 +501,28 @@ form-action 'self';
 
       <!-- Services -->
       <div class="footer-column">
-        <h3>Services</h3>
+        <h3 data-i18n-chip="srv_label2">Services</h3>
 
-        <a href="#services">Web Design</a>
-        <a href="#services">Graphic Design</a>
-        <a href="#services">Brand Identity</a>
-        <a href="#services">Video Editing</a>
-        <a href="#services">Videography</a>
+        <a href="#services" data-i18n-chip="webss">Web Design</a>
+        <a href="#services" data-i18n-chip="srv2_name">Graphic Design</a>
+        <a href="#services" data-i18n-chip="srv3_name">Brand Identity</a>
+        <a href="#services" data-i18n-chip="srv5_name">Video Editing</a>
+        <a href="#services" data-i18n-chip="srv5_name">Videography</a>
       </div>
 
       <!-- Company -->
       <div class="footer-column">
-        <h3>Company</h3>
+        <h3 data-i18n-chip="fot_comp">Company</h3>
 
-        <a href="#about">About</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#contact">Contact</a>
-        <a href="#contact">Support</a>
+        <a href="#about" data-i18n-chip="nav_about">About</a>
+        <a href="#portfolio" data-i18n-chip="nav_portfolio">Portfolio</a>
+        <a href="#contact" data-i18n-chip="nav_cta">Contact</a>
+        <a href="#contact" data-i18n-chip="suppp">Support</a>
       </div>
 
       <!-- Social -->
       <div class="footer-column">
-        <h3>Social</h3>
+        <h3 data-i18n-chip="fot_social">Social</h3>
 
         <a
           href="https://www.instagram.com/digital_ma_zn/"
