@@ -6,10 +6,17 @@ const authRoutes = require("./routes/auth.routes");
 
 const contactRoutes = require("./routes/contact.routes");
 
+const helmet = require("helmet");
+
 const app = express();
 
 const adminRoutes = require("./routes/admin.routes");
-
+//helmet add more protection 
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 // Middleware
 app.use(cors({
     origin: [
@@ -32,6 +39,7 @@ app.get("/", (req, res) => {
         message: "Digital ZN API"
     });
 });
+
 
 app.use("/api/admin",adminRoutes);
 app.use("/api/auth", authRoutes);
