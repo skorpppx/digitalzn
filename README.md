@@ -44,8 +44,7 @@ new version/
 │  │  │  ├─ auth.validator.js                                                                                                                                                          
 │  │  │  └─ contact.validator.js                                                                                                                                                       
 │  │  ├─ app.js                                                                                                                                                                        
-│  │  └─ server.js                                                                                                                                                                     
-│  ├─ .env                                                                                                                                                                             
+│  │  └─ server.js                                                                                                                                                                                                                                                                                                                                           
 │  ├─ .gitignore                                                                                                                                                                       
 │  ├─ package-lock.json                                                                                                                                                                
 │  └─ package.json                                                                                                                                                                     
