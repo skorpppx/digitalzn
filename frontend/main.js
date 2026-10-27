@@ -330,17 +330,17 @@ const LANG = {
    CAROUSEL DATA
 ============================================ */
 const CARDS = [
-  { img: 'assets/pr2.jpg',     titleKey: 'card1_title', catKey: 'card1_cat' },
-  { img: 'assets/b152a9192944243.65e6201706c6f.png',   titleKey: 'card2_title', catKey: 'card2_cat' },
-  { img: 'assets/cf0879199625531.66e5ba2a7c4f2.jpg',     titleKey: 'card3_title', catKey: 'card3_cat' },
-  { img: 'assets/yyt.png',  titleKey: 'card4_title', catKey: 'card4_cat' },
+  { img: 'assets/pr2.webp',     titleKey: 'card1_title', catKey: 'card1_cat' },
+  { img: 'assets/b152a9192944243.65e6201706c6f.webp',   titleKey: 'card2_title', catKey: 'card2_cat' },
+  { img: 'assets/cf0879199625531.66e5ba2a7c4f2.webp',     titleKey: 'card3_title', catKey: 'card3_cat' },
+  { img: 'assets/yyt.webp',  titleKey: 'card4_title', catKey: 'card4_cat' },
   { img: 'assets/prj2.gif',  titleKey: 'card5_title', catKey: 'card5_cat' },
-  { img: 'assets/fffs.jpg',   titleKey: 'card2_title', catKey: 'card6_cat' },
-  { img: 'assets/oopsd.jpg',   titleKey: 'card2_title', catKey: 'card7_cat' },
-    { img: 'assets/yyt.png',  titleKey: 'card4_title', catKey: 'card8_cat' },
+  { img: 'assets/fffs.webp',   titleKey: 'card2_title', catKey: 'card6_cat' },
+  { img: 'assets/oopsd.webp',   titleKey: 'card2_title', catKey: 'card7_cat' },
+    { img: 'assets/yyt.webp',  titleKey: 'card4_title', catKey: 'card8_cat' },
   { img: 'assets/prj2.gif',  titleKey: 'card5_title', catKey: 'card9_cat' },
-  { img: 'assets/fffs.jpg',   titleKey: 'card2_title', catKey: 'card10_cat' },
-  { img: 'assets/oopsd.jpg',   titleKey: 'card2_title', catKey: 'card11_cat' },
+  { img: 'assets/fffs.webp',   titleKey: 'card2_title', catKey: 'card10_cat' },
+  { img: 'assets/oopsd.webp',   titleKey: 'card2_title', catKey: 'card11_cat' },
 ];
 
 /* ============================================

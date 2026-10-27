@@ -1504,7 +1504,6 @@ body.service-dialog-open {
   background: var(--purple);
   box-shadow: 0 0 14px rgba(106, 92, 255, 0.45);
 }
-[dir="rtl"].about-loop-item::before {}
 
 .about-loop-item:nth-child(1) { animation-delay: 0s; }
 .about-loop-item:nth-child(2) { animation-delay: -1.5s; }
